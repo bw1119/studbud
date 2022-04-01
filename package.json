@@ -1,0 +1,15 @@
+{
+  "name": "studbud",
+  "version": "1.0.0",
+  "description": "assessment 2 deco2017 2022",
+  "main": "index.js",
+  "scripts": {
+    "test": "\u001b[A\u001b[C\u001b[C\u001b[C\u001bserver.server.js\u001b[B\u001b[A"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\u001b[A\u001b[B"
+  },
+  "author": "",
+  "license": "ISC"
+}
