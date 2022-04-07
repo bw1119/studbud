@@ -1,10 +1,10 @@
 {
   "name": "studbud",
   "version": "1.0.0",
-  "description": "deco2017-2022_A2\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[DECO\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[B\u001b[C\u001b[C",
+  "description": "assessment 2 deco2017 2022",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node public/server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/bw1119/studbud/issues"
   },
-  "homepage": "https://github.com/bw1119/studbud#readme"
+  "homepage": "https://github.com/bw1119/studbud#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
 }
