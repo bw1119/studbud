@@ -2,9 +2,11 @@
   "name": "studbud",
   "version": "1.0.0",
   "description": "assessment 2 deco2017 2022",
-  "main": "dist/index.html",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node public/server.js"
+    "start": "node public/server.js",
+    "prestart": "parcel build ./public/index.html",
+    "dev": "parcel serve ./public/index.html"
   },
   "repository": {
     "type": "git",
@@ -17,9 +19,13 @@
   },
   "homepage": "https://github.com/bw1119/studbud#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "sass": "^1.50.0"
   },
   "devDependencies": {
-    "parcel": "^2.0.0-rc.0"
+    "@parcel/transformer-sass": "^2.4.1",
+    "autoprefixer": "^10.4.4",
+    "parcel": "^2.0.0-rc.0",
+    "postcss": "^8.4.12"
   }
 }

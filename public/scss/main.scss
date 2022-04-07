@@ -1,0 +1,18 @@
+// Base 
+@import "base/color.scss";
+@import "base/reset.scss";
+@import "base/typography.scss";
+@import "base/queries.scss";
+
+// Layout 
+@import "layout/grid.scss";
+
+// Pages
+@import "pages/home.scss";
+    @import "pages/about.scss";
+
+    // Modules
+    @import "modules/footer.scss";
+    @import "modules/header.scss";
+
+// Vendor/third-party 
