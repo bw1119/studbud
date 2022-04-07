@@ -4,11 +4,11 @@ const res = require('express/lib/response');
 const app = express();
 
 // serve static files from public
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static('/dist'));
 
 // serve index file for root
 app.get('/',function(req,res) {
-	res.sendFile(__dirname + '/dist/index.html');
+	res.sendFile('index.html', {root: 'dist'});
 });
 
 // init server on port 8888

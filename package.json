@@ -1,8 +1,9 @@
 {
   "name": "studbud",
+   "browserslist": "> 0.5%, last 2 versions, not dead",
   "version": "1.0.0",
   "description": "assessment 2 deco2017 2022",
-  "main": "dist/index.js",
+  "//main": "dist/index.html",
   "scripts": {
     "start": "node public/server.js",
     "prestart": "parcel build ./public/index.html",
