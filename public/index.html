@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Task.it</title>
+    <link href="scss/main.scss" rel="stylesheet" type="text/css" />  
+  </head>
 
-<head>
-	<link href="scss/main.scss" rel="stylesheet" type="text/css" />
-</head>
+  <body>
+    <form id="taskform">
+    <!-- Task title -->
+      <label for="task">Task Title:</label>
+        <input type="text" name="task" id="taskInput">
+      <br>
 
-	<main>
-	
-		<p> "Hello world!" </p>
-	
-	</main>
+    <!-- Date input -->
+      <label for="dueDate">Due Date:</label>
+        <input type="date" name="dueDate" id="dueDateInput">
+      <br>
 
+    <!-- Time input -->
+    <!-- Completion timestamp -->
+      <label for="completionTime">Completion Time:</label>
+        <input type="time" name="completionTime" id="completionTimeInput">
+      <br>
+      <!-- Est time to complete -->
+      <label for="estimatedTime">Estimated time to complete (in mins):</label>
+          <input type="number" name="estimatedTime" id="estimatedTimeInput">
+        <br>
+
+    <!-- Priority options, with radio buttons -->
+      <label for="priority">Task Priority:</label>
+        <select name="prority" id="priorityInput">
+          <option value="">Select one</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      <br>
+      
+    <!-- Submit -->
+      <button type="submit">Submit</button>
+    </form>
+
+    <ul id="tasklist">
+    </ul>
+
+    <script src="script.js"></script>
+  </body>
 </html>
