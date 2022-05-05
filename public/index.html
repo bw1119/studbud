@@ -1,51 +1,118 @@
 <!DOCTYPE html>
 <html>
+  <!-- Head - intrinsic stuff -->
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Task.it</title>
     <link href="scss/main.scss" rel="stylesheet" type="text/css" />  
+    <script src="script.js"></script>
   </head>
 
+  <!-- Begin site body -->
   <body>
-    <form id="taskform">
-    <!-- Task title -->
-      <label for="task">Task Title:</label>
-        <input type="text" name="task" id="taskInput">
-      <br>
+  <!-- Begin grid container -->
+  <div id="container">
 
-    <!-- Date input -->
-      <label for="dueDate">Due Date:</label>
-        <input type="date" name="dueDate" id="dueDateInput">
-      <br>
+    <!-- Static header - logo on left, account button on right -->
+    <header> 
+      <h1>Studbud</h1>
+      <button id="avatar-button"></button>
+    </header>
 
-    <!-- Time input -->
-    <!-- Completion timestamp -->
-      <label for="completionTime">Completion Time:</label>
-        <input type="time" name="completionTime" id="completionTimeInput">
-      <br>
-      <!-- Est time to complete -->
-      <label for="estimatedTime">Estimated time to complete (in mins):</label>
-          <input type="number" name="estimatedTime" id="estimatedTimeInput">
-        <br>
+    <!-- Static aside - AKA the dashboard -->
+    <div id="dashboard">
 
-    <!-- Priority options, with radio buttons -->
-      <label for="priority">Task Priority:</label>
-        <select name="prority" id="priorityInput">
-          <option value="">Select one</option>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-      <br>
-      
-    <!-- Submit -->
-      <button type="submit">Submit</button>
-    </form>
+    </div>
 
-    <ul id="tasklist">
-    </ul>
+    <main>
+      <!-- KANBAN -->
+      <!-- Begin kanban container -->
+      <div id="kanban-container">
 
-    <script src="script.js"></script>
+        <!-- Kanban head -->
+        <div id="kanban-head">
+          <!-- Begin task add menu, pops up on button press -->
+          <div id="taskadd-container">
+
+            <form id="taskadd-form">
+              <!-- Task title -->
+              <label for="task">Task Title:</label>
+                <input type="text" name="task" id="taskInput">
+                <br>
+              <!-- Date input -->
+              <label for="dueDate">Due Date:</label>
+                <input type="date" name="dueDate" id="dueDateInput">
+                <br>
+              <!-- Time input -->
+                <!-- Completion timestamp -->
+                <label for="completionTime">Completion Time:</label>
+                  <input type="time" name="completionTime" id="completionTimeInput">
+                  <br>
+                <!-- Est time to complete -->
+                <label for="estimatedTime">Estimated time to complete (in mins):</label>
+                  <input type="number" name="estimatedTime" id="estimatedTimeInput">
+                  <br>
+              <!-- Priority options, with radio buttons -->
+              <label for="priority">Task Priority:</label>
+                <select name="prority" id="priorityInput">
+                  <option value="">Select one</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                </select>
+                <br>
+
+              <!-- Submit -->
+              <button type="submit">Submit</button>
+
+            </form>
+
+          <!-- End taskadd container -->
+          </div>
+        <!-- End kanban head -->
+        </div>
+
+        <!-- Begin kanban board-->
+        <div id="kanban-board">
+          
+        <!-- End kanban board -->
+        </div>
+        
+      <!-- End kanban container -->
+      </div>
+
+      <!-- ACTIVE TASK -->
+      <!-- Begin active task container -->
+      <div id="activetask-container">
+
+        <!-- Music player -->
+        <div id="activetask-music">
+
+        </div>
+        <!-- Main -->
+        <div id="activetask-main">
+
+        </div>
+        <!-- Time elapsed -->
+        <div id="activetask-elapsed">
+            
+        </div>
+        <!-- Time to completion -->
+        <div id="activetask-timeto">
+
+        </div>
+
+      <!-- End active task container -->
+      </div>
+
+      <ul id="tasklist">
+      </ul>
+
+    </main>
+
+  <!-- End grid container -->
+  </div>
+  <!-- End site body -->
   </body>
 </html>
