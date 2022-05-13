@@ -1,9 +1,19 @@
-#taskadd-container {
+// The add task form, flex but hidden by default
+#taskadd-form {
     background-color: white;
+    width: 325px;
     border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    box-shadow: 3px 5px 3px rgba(0, 0, 0, 0.2);
+    z-index: 9;
 }
-
-    #taskadd-form {
-        display: flex;
-        flex-direction: column;
+    // Container for buttons row
+    #taskadd-buttondiv {
+        display: inline;
+    }
+    // Buttons have set width
+    #taskadd-buttondiv > button {
+        width: 100px;
     }

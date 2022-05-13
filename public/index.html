@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width">
     <title>Task.it</title>
     <link href="scss/main.scss" rel="stylesheet" type="text/css" />  
-    <script src="script.js"></script>
   </head>
 
   <!-- Begin site body -->
@@ -14,16 +13,31 @@
   <!-- Begin grid container -->
   <div id="container">
 
-    <!-- Static header - logo on left, account button on right -->
+    <!-- Fixed aside - AKA the dashboard -->
+    <div id="dashboard">
+      <h3 id="dash-title">Dashboard</h3>
+      <p>What you're currently working on</p>
+      
+      <!-- Active tasks list-->
+      <div id="activetasks-container">
+        <h4 id="activetasks-title">Active tasks</h4>
+        <p><em>Delete an entry to reset its status</em></p>
+
+        <div id="activetasks">
+          <ul id="activetasks-list">
+          </ul>
+        </div>
+
+      </div>
+
+    <!-- End dashboard -->
+    </div>
+
+    <!-- Fixed header - logo on left, account button on right -->
     <header> 
-      <h1>Studbud</h1>
+      <img src="assets\brand\logo.png">
       <button id="avatar-button"></button>
     </header>
-
-    <!-- Static aside - AKA the dashboard -->
-    <div id="dashboard">
-
-    </div>
 
     <main>
       <!-- KANBAN -->
@@ -32,50 +46,55 @@
 
         <!-- Kanban head -->
         <div id="kanban-head">
-          <!-- Begin task add menu, pops up on button press -->
-          <div id="taskadd-container">
 
+          <!-- Add task button -->
+          <button id="taskadd-button" type="button">Add task</button>
+          <!-- Begin task add menu, pops up on button press -->
             <form id="taskadd-form">
               <!-- Task title -->
               <label for="task">Task Title:</label>
                 <input type="text" name="task" id="taskInput">
-                <br>
+
               <!-- Date input -->
               <label for="dueDate">Due Date:</label>
                 <input type="date" name="dueDate" id="dueDateInput">
-                <br>
+
               <!-- Time input -->
                 <!-- Completion timestamp -->
                 <label for="completionTime">Completion Time:</label>
                   <input type="time" name="completionTime" id="completionTimeInput">
-                  <br>
+
                 <!-- Est time to complete -->
-                <label for="estimatedTime">Estimated time to complete (in mins):</label>
+                <label for="estimatedTime">Time to complete:</label>
                   <input type="number" name="estimatedTime" id="estimatedTimeInput">
-                  <br>
+
               <!-- Priority options, with radio buttons -->
               <label for="priority">Task Priority:</label>
-                <select name="prority" id="priorityInput">
+                <select name="priority" id="priorityInput">
                   <option value="">Select one</option>
                   <option value="Low">Low</option>
                   <option value="Medium">Medium</option>
                   <option value="High">High</option>
                 </select>
-                <br>
-
-              <!-- Submit -->
-              <button type="submit">Submit</button>
+              
+              <!-- Container for buttons -->
+              <div id="taskadd-buttondiv">
+                <!-- Submit -->
+                <button type="submit">Submit</button>
+                <!-- Cancel -->
+                <button id="taskadd-form-cancel" type="button">Cancel</button>
+              </div>
 
             </form>
-
-          <!-- End taskadd container -->
-          </div>
         <!-- End kanban head -->
         </div>
 
         <!-- Begin kanban board-->
         <div id="kanban-board">
-          
+
+          <ul id="tasklist">
+          </ul>
+
         <!-- End kanban board -->
         </div>
         
@@ -106,13 +125,11 @@
       <!-- End active task container -->
       </div>
 
-      <ul id="tasklist">
-      </ul>
-
     </main>
 
   <!-- End grid container -->
   </div>
   <!-- End site body -->
+  <script src="script.js"></script>
   </body>
 </html>

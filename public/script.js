@@ -1,13 +1,28 @@
 // DOM variable setups
-const form = document.getElementById("taskform");
-const button = document.querySelector("#taskform > button")
+const form = document.getElementById("taskadd-form");
+var taskAddBtn = document.getElementById("taskadd-button");
+var taskAddForm = document.getElementById("taskadd-form");
+  var taskAddCnclBtn = document.getElementById("taskadd-form-cancel");
+
 var taskInput = document.getElementById("taskInput");
 var taskList = document.getElementById("tasklist");
+
   // Task elements
   var dueDateInput = document.getElementById("dueDateInput");
   var completionTimeInput = document.getElementById("completionTimeInput");
   var estimatedTimeInput = document.getElementById("estimatedTimeInput");
   var priorityInput = document.getElementById("priorityInput");
+
+
+// On task add button click, reveal task add form
+taskAddBtn.addEventListener("click", function(){
+  taskAddForm.style.display = "flex";
+});
+// On task add cancel button click, reset form and hide it
+taskAddCnclBtn.addEventListener("click", function(){
+  form.reset();
+  taskAddForm.style.display = "none";
+});
 
 // On submit button click
 form.addEventListener("submit", function(event){
@@ -72,7 +87,7 @@ function renderTask(task){
 
 function removeItemFromArray(arr, index) {
   if (index > -1){
-    arr.splice(index, 1)
+    arr.splice(index, 1);
   }
   return arr;
 }

@@ -1,0 +1,40 @@
+// Dashboard sidebar
+#dashboard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 275px;
+    padding: 75px 0px 0px 0px;
+
+    background: #ffffff80;
+    box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.2);
+}
+    #dash-title {
+        font-weight: 600;
+        margin-left: 25px;
+    }
+    #dash-title + p {
+        font-size: 0.75rem;
+        opacity: 75%;
+        margin-left: 25px;
+    }
+
+// Holds the active task list
+#activetasks-container {
+    background: lightgrey;
+    margin: 0px 15px 0px 15px;
+}
+    #activetasks-title {
+        font-weight: 400;
+        margin-left: 10px;
+    }
+    #activetasks-title + p {
+        font-size: 0.65rem;
+        opacity: 75%;
+        margin-left: 10px;
+    }
+// Active task list
+#activetasks {
+
+}
