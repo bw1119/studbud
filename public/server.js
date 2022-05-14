@@ -4,7 +4,7 @@ const res = require('express/lib/response');
 const app = express();
 
 // serve static files from public
-app.use(express.static('/dist'));
+app.use(express.static('dist'));
 
 // serve index file for root
 app.get('/',function(req,res) {
