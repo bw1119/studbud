@@ -1,0 +1,7 @@
+// footer - elements are distributed horizontally
+footer {
+    background-color:black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

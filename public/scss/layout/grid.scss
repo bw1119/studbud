@@ -7,21 +7,18 @@
 
 // main grid
 #container {  
-    display: grid;
-    grid-template-columns: 275px 1fr;
-    grid-template-rows: 60px 1fr 50px;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "header header"
-      "dashboard main"
-      "footer footer";
+  display: grid;
+  grid-template-columns: 275px 1fr;
+  grid-template-rows: 60px auto 50px;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "header header"
+    "dashboard main"
+    "footer footer";
 }
   
-// header - elements are distributed horizontally
 header { 
-    grid-area: header; 
-    display: flex;
     flex-direction: row;
 }
   
@@ -29,11 +26,11 @@ header {
     grid-area: dashboard; 
 }
  
-// main content - 2 rows for the two sections
+// main content
 main {  
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 95vh 90vh;
     gap: 0px 0px;
     grid-auto-flow: row;
     // kanban + activetask are in separate styles
@@ -42,37 +39,14 @@ main {
       "activetask-container";
     grid-area: main;
 }
+  #kanban-container {
+    grid-area: kanban-container;
+  }
+  #activetask-container {
+    grid-area: activetask-container;
+  }
 
 // footer - elements are distributed horizontally
 footer { 
     grid-area: footer; 
-    display: flex;
-    flex-direction: row;
 }
-  
-  
-html, body , #container {
-    height: 100%;
-    margin: 0;
-}
-  
-  /* For presentation only, no need to copy the code below 
-  
-  #container * {
-    border: 1px solid red;
-    position: relative;
-  }
-  
-  #container *:after {
-    content:attr(class);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-  }
-  */
-  

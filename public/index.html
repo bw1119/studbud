@@ -5,7 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Task.it</title>
-    <link href="scss/main.scss" rel="stylesheet" type="text/css" />  
+
+    <link href="scss/main.scss" rel="stylesheet" type="text/css" /> 
+
+    <!-- Load FontAwesome (for icons) -->
+    <script src="https://kit.fontawesome.com/af1f475b56.js" crossorigin="anonymous"></script>
   </head>
 
   <!-- Begin site body -->
@@ -35,7 +39,7 @@
 
     <!-- Fixed header - logo on left, account button on right -->
     <header> 
-      <img src="assets\brand\logo.png">
+      <img src="assets/brand/logo.png">
       <button id="avatar-button"></button>
     </header>
 
@@ -52,24 +56,22 @@
           <!-- Begin task add menu, pops up on button press -->
             <form id="taskadd-form">
               <!-- Task title -->
-              <label for="task">Task Title:</label>
-                <input type="text" name="task" id="taskInput">
+              <label for="task">Task title</label>
+                <input type="text" name="task" id="taskInput" required>
 
               <!-- Date input -->
-              <label for="dueDate">Due Date:</label>
+              <label for="dueDate">Due date</label>
                 <input type="date" name="dueDate" id="dueDateInput">
 
-              <!-- Time input -->
-                <!-- Completion timestamp -->
-                <label for="completionTime">Completion Time:</label>
-                  <input type="time" name="completionTime" id="completionTimeInput">
-
-                <!-- Est time to complete -->
-                <label for="estimatedTime">Time to complete:</label>
-                  <input type="number" name="estimatedTime" id="estimatedTimeInput">
-
+              <!-- Est time to complete -->
+              <label for="estimatedTime">Time to completion</label>
+              <div id="estimatedTime-container">
+                  <input type="number" name="estimatedTime" id="estimatedTimeInput-Hours" placeholder="Hours" required>
+                  <p>:</p>
+                  <input type="number" name="estimatedTime" id="estimatedTimeInput-Mins" placeholder="Mins" required>
+              </div>
               <!-- Priority options, with radio buttons -->
-              <label for="priority">Task Priority:</label>
+              <label for="priority">Task Priority</label>
                 <select name="priority" id="priorityInput">
                   <option value="">Select one</option>
                   <option value="Low">Low</option>
@@ -84,8 +86,8 @@
                 <!-- Cancel -->
                 <button id="taskadd-form-cancel" type="button">Cancel</button>
               </div>
-
             </form>
+
         <!-- End kanban head -->
         </div>
 
@@ -127,8 +129,12 @@
 
     </main>
 
+    <footer>
+      <p style="color:white">Tester</p>
+    </footer>
   <!-- End grid container -->
   </div>
+
   <!-- End site body -->
   <script src="script.js"></script>
   </body>

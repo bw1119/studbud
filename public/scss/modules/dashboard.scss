@@ -7,7 +7,7 @@
     width: 275px;
     padding: 75px 0px 0px 0px;
 
-    background-color: #b9b9b960;
+    background-color: #cacaca;
     box-shadow: 1px 0px 3px rgba(0, 0, 0, 0.2);
 }
     #dash-title {
@@ -23,7 +23,11 @@
 // Holds the active task list
 #activetasks-container {
     background-color: #ffffff;
+    border: 1px solid #999999e0;
+    border-radius: 10px;
+
     margin: 0px 15px 0px 15px;
+    padding: 5px 0px 5px 0px;
 }
     #activetasks-title {
         font-weight: 400;
@@ -31,12 +35,15 @@
     }
     #activetasks-title + p {
         font-size: 0.65rem;
-        font-weight: 600;
+        font-weight: 400;
         opacity: 75%;
         margin-left: 10px;
     }
 // Active task list
 #activetasks {
+    margin: 10px;
+    border: 1px solid #999999;
+    border-radius: 5px;
     display: flex;
-
+    height: 300px;
 }

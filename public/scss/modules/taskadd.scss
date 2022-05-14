@@ -1,19 +1,50 @@
-// The add task form, flex but hidden by default
+// The add task form, flex set in js but hidden by default
 #taskadd-form {
     background-color: white;
-    width: 325px;
+    width: 200px;
     border-radius: 5px;
+    padding: 5px 0px 5px 0px;
+
     display: none;
     flex-direction: column;
     position: fixed;
-    box-shadow: 3px 5px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
     z-index: 9;
 }
-    // Container for buttons row
+    // Labels have a bit of space, and are sized up + bolder
+    #taskadd-form > label {
+        padding: 2px;
+        margin-left: 5px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+    // Form inputs have a bit of space, and their font size is smaller than the labels
+    #taskadd-form > input, select {
+        margin: 0px 10px 5px 10px;
+        font-size: 0.75rem;
+    }
+
+    #estimatedTime-container {
+        display: inline;
+        text-align: center;
+    }
+    #estimatedTime-container > input {
+        margin: 0px 0px 5px 0px;
+        font-size: 0.75rem;
+        width: 60px;
+    }
+    #estimatedTime-container > p {
+        display: inline;
+    }
+    
+    // Container for buttons row, buttons in centre
     #taskadd-buttondiv {
         display: inline;
+        text-align: center;
     }
     // Buttons have set width
     #taskadd-buttondiv > button {
-        width: 100px;
+        width: 65px;
+        margin: 5px;
+        font-size: 0.75rem;
     }

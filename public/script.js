@@ -9,8 +9,8 @@ var taskList = document.getElementById("tasklist");
 
   // Task elements
   var dueDateInput = document.getElementById("dueDateInput");
-  var completionTimeInput = document.getElementById("completionTimeInput");
-  var estimatedTimeInput = document.getElementById("estimatedTimeInput");
+  var estimatedTimeInputMins = document.getElementById("estimatedTimeInput-Mins");
+  var estimatedTimeInputHours = document.getElementById("estimatedTimeInput-Hours");
   var priorityInput = document.getElementById("priorityInput");
 
 
@@ -29,16 +29,16 @@ form.addEventListener("submit", function(event){
   event.preventDefault();
   let task = taskInput.value;
   let dueDate = dueDateInput.value;
-  let completionTime = completionTimeInput.value;
-  let estimatedTime = estimatedTimeInput.value;
+  let estimatedTimeMins = estimatedTimeInputMins.value;
+  let estimatedTimeHours = estimatedTimeInputHours.value;
   let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
   // Call addTask() - add recorded task elements to GUI list and array
-  addTask(task, dueDate, estimatedTime, priorityRating, completionTime, false);
+  addTask(task, dueDate, estimatedTimeMins, estimatedTimeHours, priorityRating, false);
 });
 
 var taskListArray = [];
 
-function addTask(taskDescription, dueDate, estimatedTime, priorityRating, completionTime, completionStatus) {
+function addTask(taskDescription, dueDate, estimatedTimeMins, estimatedTimeHours, priorityRating, completionStatus) {
   let d = new Date();
   let dateCreated = d.getFullYear();
   let task = {
@@ -46,10 +46,9 @@ function addTask(taskDescription, dueDate, estimatedTime, priorityRating, comple
     taskDescription,
     dueDate,
     dateCreated,
-    estimatedTime,
-    completionTime,
+    estimatedTimeMins,
+    estimatedTimeHours,
     priorityRating,
-    estimatedTime,
     completionStatus
   };
   taskListArray.push(task);
