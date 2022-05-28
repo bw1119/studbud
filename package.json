@@ -1,11 +1,11 @@
 {
   "name": "studbud",
-   "browserslist": "> 0.5%, last 2 versions, not dead",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "version": "1.0.0",
   "description": "assessment 2 deco2017 2022",
   "//main": "dist/index.html",
   "scripts": {
-    "start": "node ./public/server.js",
+    "start": "node public/server.js",
     "prestart": "parcel build ./public/index.html",
     "dev": "parcel serve ./public/index.html"
   },
@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/bw1119/studbud#readme",
   "dependencies": {
+    "easytimer.js": "^4.5.3",
     "express": "^4.17.3",
+    "lockr": "^0.9.0-beta.0",
     "sass": "^1.50.0"
   },
   "devDependencies": {

@@ -21,7 +21,7 @@
     }
 
 // Holds the active task list
-#activetasks-container {
+#dashactivetasks-container {
     background-color: #ffffff;
     border: 1px solid #999999e0;
     border-radius: 10px;
@@ -29,18 +29,18 @@
     margin: 0px 15px 0px 15px;
     padding: 5px 0px 5px 0px;
 }
-    #activetasks-title {
+    #dashactivetasks-title {
         font-weight: 400;
         margin-left: 10px;
     }
-    #activetasks-title + p {
+    #dashactivetasks-title + p {
         font-size: 0.65rem;
         font-weight: 400;
         opacity: 75%;
         margin-left: 10px;
     }
 // Active task list
-#activetasks {
+#dashactivetasks {
     margin: 10px;
     border: 1px solid #999999;
     border-radius: 5px;

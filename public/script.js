@@ -1,7 +1,12 @@
+// Modules
+import { prefix, set, get, flush } from 'Lockr';
+import { Timer } from "easytimer.js";
+const timer = new Timer();
+
 // Variables
 
 // DOM variable setups
-// Taskadd form
+// Taskadd form DOM
 const form = document.getElementById("taskadd-form");
 var taskAddBtn = document.getElementById("taskadd-button");
 var taskAddForm = document.getElementById("taskadd-form");
@@ -15,33 +20,70 @@ var taskAddForm = document.getElementById("taskadd-form");
 
 var taskList = document.getElementById("tasklist");
 
-var taskListArray = [];
+// Kanban DOM
+const board = document.getElementById("kanban-board");
+
+// Kanban data
+var kanbanBoard;
+var kanbanEntries;
+
+var taskListArray = []; // DEV: delete this
 
 /////////////////////////
 // Handling on page load functions
-// - Try to see if user already has tasks in local storage
-//   - If so, render kanban board from storage
-//   - If not, 
+// - Check if local storage is populated (if user has logged in before)
+//   - If so, populate kanban board array with local storage
+//   - If not, populate local storage + kanban board array with default setup
 /////////////////////////
 
-// Called when initial HTML has been completely loaded and parsed
-//document.addEventListener("DOMContentLoaded", function() {
+// Local storage check, populate with default keys if not already existing
+// ... called when initial HTML has been completely loaded and parsed
+document.addEventListener("DOMContentLoaded", function() {
 
-// 
-window.addEventListener("load", function() {
-  // If local storage isn't empty
-  if (localStorage.length > 0) {
-    // - Need default board setup, array of objects somewhere
-    // - Decide on storage structure for kanban
-
-  } else {  // If local storage has content
-    // 
-    // Take
-    taskListArray = JSON.parse;
-  }
+  // If local storage has content
+  if (localStorage.length > 0) { 
+    // Push local storage to array
+    kanbanBoard = get('kanban_board');
+    //kanbanEntries = ; // DEV: unfinished
+  // If local storage is empty
+  } else {  
+    // Set default board state in local storage
+    set('kanban_board', ['To-do', 'In-progress', 'Done','Future']);
+    // Push local storage to array
+    kanbanBoard = get('kanban_board');
+  };
+  // Now, initialise board
+  kanbanInit();
 });
 
+// Initialise board
+function kanbanInit(){
+  // Called when page has been completely loaded
+  window.addEventListener("load", function() {
+    //flush();
+    console.log(kanbanBoard);
+    // Creates a kanban column for every entry in the array
+    for (i=0; i < kanbanBoard.length; i++) {
+      console.log('adding column ' + i + ', title:');
 
+      // Column div
+      let column = document.createElement('div',);
+
+      // Unnecessary as we use css selectors to select these divs
+      //column.setAttribute('class','kanban-column'); 
+
+      // Title taken from array
+      let columnTitle = document.createElement("h1");
+      columnTitle.textContent = kanbanBoard[i];
+      console.log('  ' + kanbanBoard[i]);
+
+      // Append column to board
+      board.appendChild(column);
+      // Append title to column
+      column.appendChild(columnTitle);
+    };
+  });
+};
 
 
 /////////////////////////

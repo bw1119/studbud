@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <!-- Head - intrinsic stuff -->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Task.it</title>
+
+    <link href="/index.c74267d1.css" rel="stylesheet" type="text/css"> 
+
+    <!-- Load FontAwesome (for icons) -->
+    <script src="https://kit.fontawesome.com/af1f475b56.js" crossorigin="anonymous" defer=""></script>
+  </head>
+
+  <!-- Begin site body -->
+  <body>
+  <!-- Begin grid container -->
+  <div id="container">
+
+    <!-- Fixed aside - AKA the dashboard -->
+    <div id="dashboard">
+      <h3 id="dash-title">Dashboard</h3>
+      <p>What you're currently working on</p>
+      
+      <!-- Active tasks list-->
+      <div id="dashactivetasks-container">
+        <h4 id="dashactivetasks-title">Active tasks</h4>
+        <p><em>Delete an entry to reset its status</em></p>
+
+        <div id="dashactivetasks">
+          <ul id="dashactivetasks-list">
+          </ul>
+        </div>
+
+      </div>
+
+    <!-- End dashboard -->
+    </div>
+
+    <!-- Fixed header - logo on left, account button on right -->
+    <header> 
+      <img src="/logo.a6f6a894.png">
+      <button id="avatar-button"></button>
+    </header>
+
+    <main>
+      <!-- KANBAN -->
+      <!-- Begin kanban container -->
+      <div id="kanban-container">
+
+        <!-- Kanban head -->
+        <div id="kanban-head">
+
+          <!-- Add task button -->
+          <button id="taskadd-button" type="button">Add task</button>
+          <!-- Begin task add menu, pops up on button press -->
+            <form id="taskadd-form">
+              <!-- Task title -->
+              <label for="task">Task title</label>
+                <input type="text" name="task" id="taskInput" required="">
+
+              <!-- Date input -->
+              <label for="dueDate">Due date</label>
+                <input type="date" name="dueDate" id="dueDateInput">
+
+              <!-- Est time to complete -->
+              <label for="estimatedTime">Time to completion</label>
+              <div id="estimatedTime-container">
+                  <input type="number" name="estimatedTime" id="estimatedTimeInput-Hours" placeholder="Hours" required="">
+                  <p>:</p>
+                  <input type="number" name="estimatedTime" id="estimatedTimeInput-Mins" placeholder="Mins" required="">
+              </div>
+              <!-- Priority options, with radio buttons -->
+              <label for="priority">Task Priority</label>
+                <select name="priority" id="priorityInput">
+                  <option value="">Select one</option>
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                </select>
+              
+              <!-- Container for buttons -->
+              <div id="taskadd-buttondiv">
+                <!-- Submit -->
+                <button type="submit">Submit</button>
+                <!-- Cancel -->
+                <button id="taskadd-form-cancel" type="button">Cancel</button>
+              </div>
+            </form>
+
+        <!-- End kanban head -->
+        </div>
+
+        <!-- Begin kanban board-->
+        <div id="kanban-board">
+
+          <ul id="tasklist">
+          </ul>
+
+        <!-- End kanban board -->
+        </div>
+        
+      <!-- End kanban container -->
+      </div>
+
+      <!-- ACTIVE TASK -->
+      <!-- Begin active task container -->
+      <div id="activetask-container">
+
+        <!-- Music player -->
+        <div id="activetask-music">
+
+        </div>
+        <!-- Main -->
+        <div id="activetask-main">
+
+        </div>
+        <!-- Time elapsed -->
+        <div id="activetask-elapsed">
+            
+        </div>
+        <!-- Time to completion -->
+        <div id="activetask-timeto">
+
+        </div>
+
+      <!-- End active task container -->
+      </div>
+
+    </main>
+
+    <footer>
+      <p style="color: #fff">Tester</p>
+    </footer>
+  <!-- End grid container -->
+  </div>
+
+  <!-- End site body -->
+  <script src="/index.3b06b0f7.js" defer=""></script>
+  </body>
+</html>

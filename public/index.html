@@ -9,7 +9,7 @@
     <link href="scss/main.scss" rel="stylesheet" type="text/css" /> 
 
     <!-- Load FontAwesome (for icons) -->
-    <script src="https://kit.fontawesome.com/af1f475b56.js" crossorigin="anonymous"></script>
+    <script type="module" src="https://kit.fontawesome.com/af1f475b56.js" crossorigin="anonymous"></script>
   </head>
 
   <!-- Begin site body -->
@@ -23,12 +23,12 @@
       <p>What you're currently working on</p>
       
       <!-- Active tasks list-->
-      <div id="activetasks-container">
-        <h4 id="activetasks-title">Active tasks</h4>
+      <div id="dashactivetasks-container">
+        <h4 id="dashactivetasks-title">Active tasks</h4>
         <p><em>Delete an entry to reset its status</em></p>
 
-        <div id="activetasks">
-          <ul id="activetasks-list">
+        <div id="dashactivetasks">
+          <ul id="dashactivetasks-list">
           </ul>
         </div>
 
@@ -136,6 +136,6 @@
   </div>
 
   <!-- End site body -->
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
   </body>
 </html>
