@@ -11,22 +11,31 @@
         font-weight: 600;
         margin-left: 25px;
     }
-    .dash-h3 + p {
-        font-size: 0.75rem;
-        opacity: 75%;
-        margin: 0px 0px 25px 25px;
+    .dashboard-container-head {
+        display: inline;
+        width: 100%;
+        text-align: justify;
+    }
+    .dropdownbutton {
+        float: right;
+        margin: 10px 10px 0px 0px;
+        text-align: center;
+    }
+    .dashboard-containertop {
+        margin-bottom: 5px;
     }
 
 // Holds the active task list
 #dashactivetasks-container {
     margin: 0px 15px 15px 15px;
-    padding: 5px 0px 5px 0px;
+    padding: 0px 0px 5px 0px;
 }
     .dash-h4 {
+        display: inline;
         font-weight: 400;
         margin-left: 10px;
     }
-    .dash-h4 + p {
+    .dash-subtitle {
         font-size: 0.65rem;
         font-weight: 600;
         opacity: 75%;
@@ -35,8 +44,6 @@
 // Active task list
 #dashactivetasks {
     margin: 10px;
-    border: 1px solid #999999;
-    border-radius: 5px;
     display: flex;
     height: 300px;
 }
@@ -44,5 +51,5 @@
 // Holds the deleted task list
 #dashdeldtasks-container {
     margin: 0px 15px 0px 15px;
-    padding: 5px 0px 5px 0px;
+    padding: 0px 0px 5px 0px;
 }

@@ -1,7 +1,7 @@
 // Modules
   // Lockr, makes it easier to handle localStorage for tasks
   import { prefix, set, get, flush } from 'Lockr';
-  prefix = 'lockr_';
+  prefix = "task_";
   // Easytimer, for the pomodoro timer
   import { Timer } from "easytimer.js";
   const timer = new Timer();
@@ -187,6 +187,7 @@ function addTask(taskTitle, taskType, dueDate, estimatedTimeMins, estimatedTimeH
   };
   set(task.id, task);
   console.log(task);
+  console.log(localStorage(task.id));
 
   kanbanEntries.push(task);
     // DEV: log array list

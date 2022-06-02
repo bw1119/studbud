@@ -1,13 +1,13 @@
 // Base 
 @import "base/reset.scss";
 
-@import "base/color.scss";
+@import "base/buttons.scss";
+@import "base/colour.scss";
 @import "base/typography.scss";
 @import "base/queries.scss";
 
 // Layout 
 @import "layout/grid.scss";
-@import "layout/mediaq.scss";
 
 // Pages
 @import "pages/home.scss";
