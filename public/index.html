@@ -19,13 +19,13 @@
 
     <!-- Fixed aside - AKA the dashboard -->
     <div id="dashboard">
-      <h3 id="dash-title">Dashboard</h3>
-      <p>What you're currently working on</p>
+      <h3 class="dash-h3">Dashboard</h3>
+      <br>
       
       <!-- Active tasks list-->
       <div id="dashactivetasks-container">
-        <h4 id="dashactivetasks-title">Active tasks</h4>
-        <p><em>Delete an entry to reset its status</em></p>
+        <h4 class="dash-h4">Active tasks</h4>
+        <p><em>What you're currently working on</em></p>
 
         <div id="dashactivetasks">
           <ul id="dashactivetasks-list">
@@ -34,13 +34,23 @@
 
       </div>
 
+      <!-- Archived tasks list - currently not functional -->
+      <div id="dashdeldtasks-container">
+        <h4 class="dash-h4">Archived tasks</h4>
+        <p><em>Recently deleted tasks</em></p>
+      </div>
+
     <!-- End dashboard -->
     </div>
 
     <!-- Fixed header - logo on left, account button on right -->
     <header> 
+
       <img src="assets/brand/logo.png">
-      <button id="avatar-button"><i class="fa-regular fa-circle-user"></i></button>
+
+      <!-- Profile button - currently non-functional -->
+      <a href="#" id="avatar-button" ><i class="fa-solid fa-circle-user"></i></a>
+
     </header>
 
     <main>

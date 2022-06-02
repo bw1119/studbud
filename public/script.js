@@ -25,9 +25,7 @@ const board = document.getElementById("kanban-board");
 
 // Kanban data
 var kanbanBoard;
-var kanbanEntries;
-
-var taskListArray = []; // DEV: delete this
+var kanbanEntries = {};
 
 /////////////////////////
 // Handling on page load functions
@@ -42,16 +40,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // If local storage has content
   if (localStorage.length > 0) { 
+    console.log("Local storage exists: y");
     // Push local storage to array
     kanbanBoard = get('kanban_board');
     //kanbanEntries = ; // DEV: unfinished
+
   // If local storage is empty
   } else {  
+    console.log("Local storage exists: n");
     // Set default board state in local storage
     set('kanban_board', ['To-do', 'In-progress', 'Done','Future']);
     // Push local storage to array
     kanbanBoard = get('kanban_board');
   };
+  
   // Now, initialise board
   kanbanInit();
 });
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 /////////////////////////
 // Handling kanban render functionality
-// - 
+// 
 /////////////////////////
 
 // Initialise board
@@ -180,7 +182,7 @@ function addTask(taskTitle, dueDate, estimatedTimeMins, estimatedTimeHours, prio
     priorityRating,
     completionStatus
   };
-  taskListArray.push(task);
+  kanbanEntries.push(task);
   
   // DEV: log array list
   console.log(taskListArray);
