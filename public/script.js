@@ -30,7 +30,7 @@ const board = document.getElementById("kanban-board");
 var kanbanBoard;
 var kanbanEntries = [];
 
-prefix = 'task_';
+//prefix;
 
 /////////////////////////
 // Handling on page load functions
