@@ -58,7 +58,7 @@
       <!-- Begin kanban container -->
       <div id="kanban-container">
 
-        <!-- Kanban head -->
+        <!-- Kanban head - with add task button -->
         <div id="kanban-head">
 
           <!-- Add task button -->
@@ -66,8 +66,15 @@
           <!-- Begin task add menu, pops up on button press -->
             <form id="taskadd-form">
               <!-- Task title -->
-              <label for="task">Task title</label>
+              <label for="task">Task name</label>
                 <input type="text" name="task" id="taskInput" required>
+
+              <!-- Task type -->
+              <label for="tasktype">Task type</label>
+                <select name="tasktype" id="tasktypeInput">
+                  <option value="Notes">Notes</option>
+                  <option value="Reading">Reading</option>
+                </select>
 
               <!-- Date input -->
               <label for="dueDate">Due date</label>
@@ -76,14 +83,13 @@
               <!-- Est time to complete -->
               <label for="estimatedTime">Time to completion</label>
               <div id="estimatedTime-container">
-                  <input type="number" name="estimatedTime" id="estimatedTimeInput-Hours" placeholder="Hours" required>
+                  <input type="number" name="estimatedTime" id="estimatedTimeInput-Hours" placeholder="Hours" min="00" required>
                   <p>:</p>
-                  <input type="number" name="estimatedTime" id="estimatedTimeInput-Mins" placeholder="Mins" required>
+                  <input type="number" name="estimatedTime" id="estimatedTimeInput-Mins" placeholder="Mins" max="59" min="01" required>
               </div>
               <!-- Priority options, with radio buttons -->
               <label for="priority">Task Priority</label>
                 <select name="priority" id="priorityInput">
-                  <option value="">Select one</option>
                   <option value="Low">Low</option>
                   <option value="Medium">Medium</option>
                   <option value="High">High</option>

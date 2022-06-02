@@ -1,7 +1,9 @@
 // Modules
-import { prefix, set, get, flush } from 'Lockr';
-import { Timer } from "easytimer.js";
-const timer = new Timer();
+  // Lockr, makes it easier to handle localStorage for tasks
+  import { prefix, set, get, flush } from 'Lockr';
+  // Easytimer, for the pomodoro timer
+  import { Timer } from "easytimer.js";
+  const timer = new Timer();
 
 // Variables
 
@@ -13,6 +15,7 @@ var taskAddForm = document.getElementById("taskadd-form");
   var taskAddCnclBtn = document.getElementById("taskadd-form-cancel");
   // Taskadd data inputs
   var taskInput = document.getElementById("taskInput");
+  var tasktypeInput = document.getElementById("tasktypeInput");
   var dueDateInput = document.getElementById("dueDateInput");
   var estimatedTimeInputMins = document.getElementById("estimatedTimeInput-Mins");
   var estimatedTimeInputHours = document.getElementById("estimatedTimeInput-Hours");
@@ -25,7 +28,9 @@ const board = document.getElementById("kanban-board");
 
 // Kanban data
 var kanbanBoard;
-var kanbanEntries = {};
+var kanbanEntries = [];
+
+prefix = 'task_';
 
 /////////////////////////
 // Handling on page load functions
@@ -42,16 +47,16 @@ document.addEventListener("DOMContentLoaded", function() {
   if (localStorage.length > 0) { 
     console.log("Local storage exists: y");
     // Push local storage to array
-    kanbanBoard = get('kanban_board');
+    kanbanBoard = JSON.parse(localStorage.getItem('kanban_board'));
     //kanbanEntries = ; // DEV: unfinished
 
   // If local storage is empty
   } else {  
     console.log("Local storage exists: n");
     // Set default board state in local storage
-    set('kanban_board', ['To-do', 'In-progress', 'Done','Future']);
+    localStorage.setItem('kanban_board', JSON.stringify(['To-do', 'In-progress', 'Done','Future']));
     // Push local storage to array
-    kanbanBoard = get('kanban_board');
+    kanbanBoard = JSON.parse(localStorage.getItem('kanban_board'));
   };
   
   // Now, initialise board
@@ -70,6 +75,7 @@ function kanbanInit(){
   window.addEventListener("load", function() {
     //flush();
     console.log(kanbanBoard);
+    console.log(kanbanEntries);
     
     // Creates a kanban column for every entry in the array
     for (let i=0; i < kanbanBoard.length; i++) {
@@ -117,8 +123,8 @@ function renderTask(task){
   delButton.addEventListener("click", function(event){
     event.preventDefault();
     let id = event.target.parentElement.getAttribute('data-id');
-    let index = taskListArray.findIndex(task => task.id === Number(id));
-    removeItemFromArray(taskListArray,index);
+    let index = kanbanEntries.findIndex(task => task.id === Number(id));
+    removeItemFromArray(kanbanEntries,index);
     item.remove();
   });
 
@@ -138,8 +144,7 @@ function removeItemFromArray(arr, index) {
 /////////////////////////
 // Handling task add functions
 // - EventListeners for form buttons
-// - Taskadd form sends values to the taskListArray[]
-// - Renders a new task in the board (REWRITE NEEDED)
+// - Taskadd form sends values to the kanbanEntries[]
 /////////////////////////
 
 // On task add button click, reveal task add form
@@ -156,36 +161,37 @@ taskAddCnclBtn.addEventListener("click", function(){
 form.addEventListener("submit", function(event){
   event.preventDefault();
   let task = taskInput.value;
+  let taskType = tasktypeInput.options[tasktypeInput.selectedIndex].value;
   let dueDate = dueDateInput.value;
   let estimatedTimeMins = estimatedTimeInputMins.value;
   let estimatedTimeHours = estimatedTimeInputHours.value;
   let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
   
   // Call addTask() - add recorded task elements to GUI list and array
-  addTask(task, dueDate, estimatedTimeMins, estimatedTimeHours, priorityRating, false);
+  addTask(task, taskType, dueDate, estimatedTimeMins, estimatedTimeHours, priorityRating, false);
 });
 
 // Push new task to array, render on client
-function addTask(taskTitle, dueDate, estimatedTimeMins, estimatedTimeHours, priorityRating, completionStatus) {
-  let d = new Date();
-  let dateCreated = d.getFullYear();
+function addTask(taskTitle, taskType, dueDate, estimatedTimeMins, estimatedTimeHours, priorityRating, completionStatus) {
 
   let task = {
     // Assign unique id to task
     id: Date.now(), 
     // User datapoints
     taskTitle,
+    taskType,
     dueDate,
-    dateCreated,
     estimatedTimeMins,
     estimatedTimeHours,
     priorityRating,
     completionStatus
   };
+  set(task.id, task);
+  console.log(task);
+
   kanbanEntries.push(task);
-  
-  // DEV: log array list
-  console.log(taskListArray);
+    // DEV: log array list
+    console.log(kanbanEntries);
   
   renderTask(task);
 };
