@@ -1,6 +1,7 @@
 // Modules
   // Lockr, makes it easier to handle localStorage for tasks
   import { prefix, set, get, flush } from 'Lockr';
+  prefix = 'lockr_';
   // Easytimer, for the pomodoro timer
   import { Timer } from "easytimer.js";
   const timer = new Timer();
@@ -29,8 +30,6 @@ const board = document.getElementById("kanban-board");
 // Kanban data
 var kanbanBoard;
 var kanbanEntries = [];
-
-//prefix;
 
 /////////////////////////
 // Handling on page load functions
