@@ -22,6 +22,7 @@
   "dependencies": {
     "easytimer.js": "^4.5.3",
     "express": "^4.17.3",
+    "interactjs": "^1.10.11",
     "lockr": "^0.9.0-beta.0",
     "sass": "^1.50.0"
   },

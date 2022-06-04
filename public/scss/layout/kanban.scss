@@ -65,11 +65,11 @@
 .kanban-entry {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     position: absolute;
     background-color: #ffffff;
     width: 8vw;
     text-align: left;
+    aspect-ratio: 1 / 1;
 }
     .kanban-entry > button {
         position: absolute;
@@ -82,21 +82,30 @@
         right: -3%;
         color: #707070;
     }
-    .kanban-entry-title {
-        font-size: 16px;
-        font-size: 0.85vw;
-        font-weight: 500;
+
+    .kanban-entry-textcontainer {
+        height: 88%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        aspect-ratio: auto;
     }
-    .kanban-entry-duedate, .kanban-entry-priority {
-        margin: 3%;
-        font-size: 14px;
-        font-size: 0.75vw;
-    }
-    .kanban-entry-priority {
-        border-top: solid 1px #70707040;
-    }
+        .kanban-entry-title {
+            margin: 3%;
+            font-size: 16px;
+            font-size: 0.85vw;
+            font-weight: 500;
+        }
+        .kanban-entry-duedate, .kanban-entry-priority {
+            margin: 3%;
+            font-size: 13px;
+            font-size: 0.68vw;
+        }
+        .kanban-entry-priority {
+            border-top: solid 1px #70707040;
+        }
 .kanban-entryheader {
     cursor: move;
-    padding: 3%;
+    height: 12%;
     background-color: lightcyan;
 }
