@@ -1,18 +1,43 @@
 .dropdownbutton {
     //border: 0.5px solid #70707080;
     border: none;
-    background: #ffdab880;
+    background-color: #ffdab880;
     border-radius: 5px;
     color: #707070;
     line-height: 13px;
 }
 
 #taskadd-button {
-    background: #FF6E50;
+    background-color: #FF6E50;
     width: 140px;
     height: 50px;
     border-radius: 20px;
     color: #ffffff;
     border: none;
     font-size: 22px;
+}
+
+#timerbuttons-container > button {
+    background-color: #929292;
+    width: fit-content;
+    height: 40px;
+    border-radius: 15px;
+    color: #ffffff;
+    border: none;
+    font-size: 1.25rem;
+    padding: 0px 10px 0px 10px;
+}
+
+.editbutton {
+    width: fit-content;
+    height: 40px;
+    text-align:center;
+    border-radius: 15px;
+    color: #ffffff;
+    border: none;
+    font-size: 1.25rem;
+    padding: 0px 10px 0px 10px;
+}
+#activetaskmain-editbutton {
+    background-color: #929292;
 }

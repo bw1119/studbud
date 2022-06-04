@@ -30,7 +30,7 @@ header {
 main {  
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 95vh 90vh;
+    grid-template-rows: min-content min-content;
     gap: 0px 0px;
     grid-auto-flow: row;
     // kanban + activetask are in separate styles

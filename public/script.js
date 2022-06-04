@@ -3,7 +3,9 @@
   import { set, get, rm } from 'Lockr';
   // Easytimer, for the pomodoro timer
   import { Timer } from "easytimer.js";
-  const timer = new Timer();
+  const pomTimer = new Timer();
+  const stopWatch = new Timer();
+  const timeToComplete = new Timer();
   // Interact, for notes
   import interact from 'interactjs'
 
@@ -27,7 +29,18 @@ var taskAddForm = document.getElementById("taskadd-form");
 // Kanban DOM
 const board = document.getElementById("kanban-board");
 
-var taskEntryPoint;
+// Active task DOM
+var activeTaskMainTitle = document.querySelector(".activetaskmain-h1");
+var activeTaskMainTopType = document.querySelector(".activetaskpanel-topbig > h4");
+
+var activeTaskTimerDueDate = document.querySelector("#activetasktimer-due > p");
+
+var activeTaskTopBig = document.querySelectorAll('.activetaskpanel-topbig');
+var activeTaskTopSmall = document.querySelectorAll('.activetaskpanel-topsmall');
+
+var pomodoroStartBtn = document.querySelector('#timerbuttons-container > .startButton');
+var pomodoroPauseBtn = document.querySelector('#timerbuttons-container > .pauseButton');
+var pomodoroResetBtn = document.querySelector('#timerbuttons-container > .resetButton');
 
 // Kanban data
 var kanbanBoard = [];
@@ -88,8 +101,8 @@ function kanbanInit(){
 
     // Check for existing kanban entries
     for (let i=0; i < kanbanEntries.length; i++) {
-        // Render and log id
-        renderTask(kanbanEntries[i]);
+      // Render and log id
+      renderTask(kanbanEntries[i]);
     }
   });
 };
@@ -98,14 +111,6 @@ function kanbanRenderColumn(i){
   // Column div
   let column = document.createElement('div');
   column.setAttribute('class','kanban-column'); 
-
-  
-  /* // Old
-  let columnGrid = document.createElement('div');
-  columnGrid.setAttribute('class','kanban-column_grid');
-  // Assigns a unique name for each grid area
-  columnGrid.style.gridTemplateAreas = `"${kanbanBoard[i].name + 1} ${kanbanBoard[i].name + 2}" "${kanbanBoard[i].name + 3} ${kanbanBoard[i].name + 4}" "${kanbanBoard[i].name + 5} ${kanbanBoard[i].name + 6}" "${kanbanBoard[i].name + 7} ${kanbanBoard[i].name + 8}" "${kanbanBoard[i].name + 9} ${kanbanBoard[i].name + 10}"`; 
-  */
 
   // Title taken from array
   let columnTitle = document.createElement("h1");
@@ -125,15 +130,21 @@ function kanbanRenderColumn(i){
 // DEV: NEEDS REWRITE FOR KANBAN BOARD
 function renderTask(task){
   console.log(task);
+
   // Create HTML elements
   let item = document.createElement("div");
     item.setAttribute('data-id', task.id);
+    item.setAttribute('data-x', task.interactX);
+    item.setAttribute('data-y', task.interactY);
     item.className = 'kanban-entry';
-    item.style.zIndex = kanbanEntries.length;
-    item.style.top = task.posX;
-    item.style.left = task.posY;
+      item.style.zIndex = kanbanEntries.length;
+      item.style.transform = task.translatePos;
+      item.style.width = task.interactW;
+      item.style.height = task.interactH;
+      item.style.backgroundColor = `hsl(${task.colourCode}, 80%)`;
 
   let itemHead = document.createElement("div");
+  itemHead.setAttribute('style', `background-color: hsl(${task.colourCode}, 75%)`);
     itemHead.className = 'kanban-entryheader';
 
   let itemTxtContainer = document.createElement("div");
@@ -154,6 +165,11 @@ function renderTask(task){
   // Extra Task DOM elements
   let delButton = document.createElement("button");
   let delButtonText = document.createTextNode("✕");
+    delButton.classname = 'kanban-entrybutton';
+
+  let activateButton = document.createElement("button");
+  let activateButtonText = document.createTextNode("Activate");
+    activateButton.classname = 'kanban-entrybutton';
   
   item.appendChild(itemHead);
   item.appendChild(itemTxtContainer);
@@ -162,7 +178,9 @@ function renderTask(task){
     itemTxtContainer.appendChild(priority);
 
   delButton.appendChild(delButtonText);
-  item.appendChild(delButton);
+  itemHead.appendChild(delButton);
+  activateButton.appendChild(activateButtonText);
+  itemHead.appendChild(activateButton);
 
   // Event Listeners for DOM elements
   delButton.addEventListener("click", function(event){
@@ -172,10 +190,16 @@ function renderTask(task){
     removeItem(task, index);
     item.remove();
   });
+  // Event Listeners for DOM elements
+  activateButton.addEventListener("click", function(event){
+    event.preventDefault();
+    //let id = event.target.parentElement.getAttribute('data-id');
+    activetaskInit(task);
+    task.active = true;
+  });
 
   // Append new item to task list on the document
   board.appendChild(item);
-  reCheckEntries(task);
 
   // Clear the input form
   form.reset();
@@ -194,133 +218,59 @@ function removeItem(task, index) {
 }
 
 
-// OLD CODE 
-
 /////////////////////////
-// Handling interactible (dragging and making active task) kanban notes
-// - Code from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_draggable
-// - (Modified)
-/////////////////////////
-/*
-// Make the DIV element draggagle:
-function reCheckEntries(task) {
-  dragElement(task, document.querySelector(`div[data-id="${task.id}"`));
-
-};
-
-function dragElement(task, elmnt) {
-  console.log("test1");
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (elmnt.querySelector(".kanban-entryheader")) {
-    console.log("test2");
-    // if present, the header is where you move the DIV from:
-    elmnt.querySelector(".kanban-entryheader").onmousedown = dragMouseDown;
-  } else {
-    console.log("test2a");
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
-  };
-
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = pxToPercent(board.offsetWidth, e.clientX);
-    console.log(pos3);
-    pos4 = pxToPercent(board.offsetHeight, e.clientY);
-    console.log(pos4);
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  };
-
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pxToPercent(board.offsetWidth, pos3 - e.clientX);
-    pos2 = pxToPercent(board.offsetHeight, pos4 - e.clientY);
-    pos3 = pxToPercent(board.offsetWidth, e.clientX);
-    pos4 = pxToPercent(board.offsetHeight, e.clientY);
-
-    // set the element's new position:
-    let posNewX = (elmnt.offsetTop - pos2) + "%";
-    let posNewY = (elmnt.offsetLeft - pos1) + "%";
-
-    elmnt.style.top = posNewX;
-    elmnt.style.left = posNewY;
-
-    // Push new coords to array and push updated object to localStorage
-    for (let i=0; i < kanbanEntries.length; i++) {
-      if (kanbanEntries[i].id == task.id) {
-        kanbanEntries[i].posX = posNewX;
-        kanbanEntries[i].posY = posNewY;
-
-        set(task.id, kanbanEntries[i]);
-      };
-    };
-
-  };
-
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  };
-}
-
-function $(el){
-  return document.getElementById(el);
-}
-var tzdragg = function(){
-  return {
-      move : function(divid,xpos,ypos){
-         console.log('1');
-          var a = $(divid);
-          $(divid).style.left = xpos + 'px';
-          $(divid).style.top = ypos + 'px';
-      },
-      startMoving : function(evt){
-         
-          evt = evt || window.event;
-          var posX = evt.clientX,
-              posY = evt.clientY,
-              a = $('elem'),
-          divTop = a.style.top,
-          divLeft = a.style.left;
-          
-          divTop = divTop.replace('px','');
-          divLeft = divLeft.replace('px','');
-          var diffX = posX - divLeft,
-              diffY = posY - divTop;
-          document.onmousemove = function(evt){
-              evt = evt || window.event;
-              var posX = evt.clientX,
-                  posY = evt.clientY,
-                  aX = posX - diffX,
-                  aY = posY - diffY;
-         var boun=document.getElementById("parent").offsetWidth-document.getElementById("elem").offsetWidth;
-             
-              if((aX>0)&&(aX<boun)&&(aY>0)&&(aY<boun))
-              tzdragg.move('elem',aX,aY);
-          }
-      },
-      stopMoving : function(){
-          var a = document.createElement('script');
-          document.onmousemove = function(){}
-      },
-  }
-}();
-
-*/
-
-/////////////////////////
-// Interact.js
+// Interact.js for kanban "entries"
 // 
 /////////////////////////
 
 // target elements with the "kanban-entry" class
-interact('.kanban-entryheader')
+interact('.kanban-entry')
+  .resizable({
+    // resize from all edges and corners
+    edges: { left: true, right: true, bottom: true, top: true },
+
+    listeners: {
+      move (event) {
+        var target = event.target
+        var x = (parseFloat(target.getAttribute('data-x')) || 0)
+        var y = (parseFloat(target.getAttribute('data-y')) || 0)
+
+        // update the element's style
+        target.style.width = event.rect.width + 'px'
+        target.style.height = event.rect.height + 'px'
+                
+        // Push new coords to array and push updated object to localStorage
+        for (let i=0; i < kanbanEntries.length; i++) {
+          if (kanbanEntries[i].id == event.target.getAttribute('data-id')) {
+
+            kanbanEntries[i].interactW = event.target.style.width;
+            kanbanEntries[i].interactH = event.target.style.height;
+
+            set(event.target.getAttribute('data-id'), kanbanEntries[i]);
+            //console.log(get(event.target.getAttribute('data-id')));
+          };
+        };
+      }
+    },
+    modifiers: [
+      // keep the edges inside the parent
+      interact.modifiers.restrictEdges({
+        outer: 'parent'
+      }),
+
+      // minimum size
+      interact.modifiers.restrictSize({
+        min: { width: 150, height: 150 }
+      }),
+
+      // maximum size
+      interact.modifiers.restrictSize({
+        max: { width: 300, height: 300 }
+      })
+    ],
+
+    inertia: true
+  })
   .draggable({
     // enable inertial throwing
     inertia: true,
@@ -340,6 +290,18 @@ interact('.kanban-entryheader')
 
       // call this function on every dragend event
       end (event) {
+        
+        // Push new coords to array and push updated object to localStorage
+        for (let i=0; i < kanbanEntries.length; i++) {
+          if (kanbanEntries[i].id == event.target.getAttribute('data-id')) {
+
+            kanbanEntries[i].translatePos = event.target.style.transform;
+            kanbanEntries[i].interactX = event.target.getAttribute('data-x');
+            kanbanEntries[i].interactY = event.target.getAttribute('data-y');
+
+            set(event.target.getAttribute('data-id'), kanbanEntries[i]);
+          };
+        };
 
       }
     }
@@ -358,9 +320,6 @@ function dragMoveListener (event) {
   target.setAttribute('data-x', x)
   target.setAttribute('data-y', y)
 }
-
-// this function is used later in the resizing and gesture demos
-window.dragMoveListener = dragMoveListener
 
 /////////////////////////
 // Handling task add functions
@@ -390,6 +349,8 @@ form.addEventListener("submit", function(event){
   
   // Call addTask() - add recorded task elements to GUI list and array
   addTask(task, taskType, dueDate, estimatedTimeMins, estimatedTimeHours, priorityRating, false);
+
+  //taskAddForm.style.display = "none";
 });
 
 // Push new task to array, render on client
@@ -398,7 +359,9 @@ function addTask(taskTitle, taskType, dueDate, estimatedTimeMins, estimatedTimeH
   let task = {
     // Assign unique id to task
     id: Date.now(), 
-    // User datapoints
+    // Assign unique colour
+    colourCode: `${Math.random() * 360}, ${Math.random() * 100}%`,
+    // User datapoints frm form
     taskTitle,
     taskType,
     dueDate,
@@ -406,9 +369,16 @@ function addTask(taskTitle, taskType, dueDate, estimatedTimeMins, estimatedTimeH
     estimatedTimeHours,
     priorityRating,
     completionStatus,
-    // Random coord position in board
-    posX: `${pxToPercent(board.offsetWidth, Math.floor(Math.random() * board.offsetWidth))}%`,
-    posY: `${pxToPercent(board.offsetHeight, Math.floor(Math.random() * board.offsetHeight))}%`
+    // Translate functions
+    translatePos: "",
+      interactX: "",
+      interactY: "",
+      interactW: "",
+      interactH: "",
+    // Task active status
+    active: false,
+    // Elapsed time
+    timeElapsed: 0
   };
   console.log(board.offsetWidth);
   console.log(board.offsetHeight);
@@ -425,14 +395,98 @@ function addTask(taskTitle, taskType, dueDate, estimatedTimeMins, estimatedTimeH
   renderTask(task);
 };
 
-function pxToPercent(axis, inputNo) {
-  let result = inputNo / axis * 100;
-  console.log(result);
+//function pxToPercent(axis, inputNo) {
+//  let result = inputNo / axis * 100;
+//  console.log(result);
 
-  return result;
-}
+//  return result;
+//}
 
 /////////////////////////
 // Handling general activetask section render functionality
 // - 
 /////////////////////////
+
+// Initialise activetask section
+function activetaskInit(task){
+  // Local scope vars
+  let mainEditButton = document.querySelector("#activetaskmain-editbutton");
+  let mainTimerButtons = document.querySelectorAll("#timerbuttons-container > button");
+  let backgroundsLvl1 = document.querySelectorAll(".activetaskpanel-lvl1");
+
+  // Change text elements
+  activeTaskMainTitle.textContent = task.taskTitle;
+  activeTaskMainTopType.textContent = task.taskType;
+
+  // Set colours
+  mainEditButton.style.backgroundColor = `hsl(${task.colourCode}, 60%)`
+
+    // For loops to set colours
+    for (let i = 0; i < activeTaskTopSmall.length; i++) {
+      activeTaskTopSmall[i].style.backgroundColor = `hsl(${task.colourCode}, 80%)`
+    };
+    for (let i = 0; i < activeTaskTopBig.length; i++) {
+      activeTaskTopBig[i].style.backgroundColor = `hsl(${task.colourCode}, 80%)`
+    };
+    for (let i = 0; i < mainTimerButtons.length; i++) {
+      mainTimerButtons[i].style.backgroundColor = `hsl(${task.colourCode}, 60%)`
+    };
+    for (let i = 0; i < backgroundsLvl1.length; i++) {
+      backgroundsLvl1[i].style.backgroundColor = `hsl(${task.colourCode}, 98%)`
+    };
+  
+
+  activeTaskTimerDueDate.innerHTML = `<span style="font-weight:500">Due</span>: ${task.dueDate.substring(5)}`;
+
+  // Scroll down to section
+  document.getElementById('activetask-container').scrollIntoView();
+
+  pomodoroInit(task);
+};
+
+function pomodoroInit(task) {
+  pomodoroStartBtn.addEventListener('click', function(e) {
+    // Pomodoro
+    pomTimer.start({precision: 'seconds', countdown: true, startValues: {minutes: 25}});
+  });
+  pomodoroPauseBtn.addEventListener('click', function(e) {
+    // Pomodoro
+    pomTimer.pause();
+      // Stopwatch
+      stopWatch.pause();
+  });
+  pomodoroResetBtn.addEventListener('click', function(e) {
+    // Pomodoro
+    pomTimer.reset();
+    pomTimer.pause();
+      // Stopwatch
+      stopWatch.pause();
+  });
+
+  pomTimer.addEventListener('secondsUpdated', function (e) {
+    // Pomodoro
+    document.querySelector('#maintimer > .values').textContent = `${pomTimer.getTimeValues()}`;
+      // Stopwatch
+      document.querySelector('#activetaskstopwatch-readout > .values').textContent = `${stopWatch.getTimeValues()}`;
+
+      task.timeElapsed++;
+        // Push new elapsed time to array and push updated object to localStorage
+        for (let i=0; i < kanbanEntries.length; i++) {
+          if (kanbanEntries[i].id == task.id) {    
+            kanbanEntries[i].timeElapsed = task.timeElapsed;
+
+            set(task.id, kanbanEntries[i]);
+          };
+        };
+  });
+
+  pomTimer.addEventListener('started', function (e) {
+      // Stopwatch
+      stopWatch.start({startValues: {seconds: task.timeElapsed}});  
+  });
+
+  pomTimer.addEventListener('reset', function (e) {
+    // Pomodoro
+    document.querySelector('#maintimer > .values').textContent = `${pomTimer.getTimeValues()}`;
+  });
+}

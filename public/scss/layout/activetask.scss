@@ -2,38 +2,36 @@
 // Container
 #activetask-container {  
     display: grid;
-    grid-template-columns: 0.4fr 1fr 0.4fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: 250px min-content 250px;
+    grid-template-rows: min-content;
     gap: 0px 0px;   
     grid-auto-flow: row;
     grid-template-areas:
       "activetask-left activetask-main activetask-right";
-    margin: 5% 10% 2.5% 10%;
+    margin: 0 auto;
+    margin-top: 7.5%;
+    margin-bottom: 2.5%;
 }
     // Headings
     .activetaskmain-h1 {
         text-align: center;
         text-decoration: underline 3px;
         font-size: 3rem;
-        font-size: 2.5vw;
         font-weight: 600;
     }
     .activetaskmain-h2 {
         text-align: center;
         font-size: 1.85rem;
-        font-size: 1.65vw;
         font-weight: 600;
     }
     .activetaskpanel-h2 {
         text-align: center;
         text-decoration: underline 2px;
         font-size: 1.5rem;
-        font-size: 1.35vw;
         font-weight: 500;
     }
     .activetaskpanel-h3 {
         font-size: 1.35rem;
-        font-size: 1.15vw;
         font-weight: 400;
     }
 
@@ -41,6 +39,15 @@
     .activetaskpanel-topbig {
         margin-bottom: 5px;
     }
+        .activetaskpanel-topbig > h4 {
+            text-align: center;
+            width: fit-content;
+            margin: 0 auto;
+            color:#ffffff;
+            font-weight: 500;
+            text-decoration: underline 2px;
+            text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+        }
     .activetaskpanel-topsmall {
         margin-bottom: 5px;
     }
@@ -51,50 +58,118 @@
     border-radius: 40px;
 
     grid-area: activetask-main; 
-    width:100%;
+    width:100%; 
     height:100%;
 }
     // Edit button positioned around top right
     #activetaskmain-editbutton {
         position: relative;
         right: 3%;
-        top: 24px;
+        top: 20px;
         float: right;
     }
 
-    // Left side
-    #activetask-left { 
-        grid-area: activetask-left; 
-        display: block;
+    // Timer
+    #activetaskmain-pomodoro {
+        width: fit-content;
+        margin: 25px 100px 10px 100px;
+        border-radius: 20px;
+        padding: 5px 25px 5px 25px;
     }
-        #activetask-stopwatch { 
-            background-color: #ffffff;
-            border-radius: 20px;
-
-            margin: 0px 20px 10px 20px;
+    #maintimer {
+        padding: 0px 15px 15px 15px;
+    }
+        #maintimer .values {
+            font-size: 6rem;
+            width: 425px;
+            text-align:center;
         }
-        #activetask-timer { 
-            background-color: #ffffff;
-            border-radius: 20px;
+        #timerbuttons-container {
+            display: flex;
+            gap: 15px;
+            flex-direction: row;
+            justify-content: center;
+        }
+    // Checklist
+    #activetaskmain-checklist-container {
+        margin: 25px 2.5% 2.5% 2.5%;
+        border-radius: 20px;
+    }
+        #activetaskmain-checklist-container > h2 {
+            margin: 5px 0px 15px 0px;
+        }
+
+        #activetaskmain-checklist {
+            overflow-y: scroll;
+            height: 200px;
+            margin: 25px;
+        }
+
+// Left side
+#activetask-left { 
+    grid-area: activetask-left; 
+    display: block;
+}
+    #activetask-stopwatch { 
+        background-color: #ffffff;
+        border-radius: 20px;
+
+        margin: 0px 20px 10px 20px;
+    }
+    #activetaskstopwatch-readout {
+        margin: 10px;
+    }
+    #activetasktimer-readout {
+        margin: 10px;
+    }
+        #activetaskstopwatch-readout .values {
+            font-size: 2rem;
+            text-align:center;
+        }
+    #activetask-timer { 
+        background-color: #ffffff;
+        border-radius: 20px;
             
-            margin: 10px 20px 0px 20px;
-        }
-
-    // Right side    
-    #activetask-right {  
-        display: block;
-        grid-area: activetask-right;
+        margin: 10px 20px 0px 20px;
     }
-        #activetask-music {
-            background-color: #ffffff;
-            border-radius: 20px;
-
-            margin: 0px 20px 0px 20px;
+        #activetasktimer-readout .values {
+            font-size: 2rem;
+            text-align:center;
         }
-        #activetaskmain-pomedit { 
-            background-color: #ffffff;
-            border-radius: 0px 10px 10px 0px;
+    #activetasktimer-due {
+        font-size: 1rem;
+        width:fit-content;
+        margin: 0 auto;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+        #activetasktimer-due > p {
+            margin: 2px 10px 2px 10px;
+        }
 
-            width: 150px;
-            margin-top: 10px;
+// Right side    
+#activetask-right {  
+    display: block;
+    grid-area: activetask-right;
+}
+    #activetask-music {
+        background-color: #ffffff;
+        border-radius: 20px;
+
+        margin: 0px 20px 0px 20px;
+    }
+    #activetaskmain-pomedit { 
+        background-color: #ffffff;
+
+        width: 150px;
+        margin-top: 10px;
+    }
+    #activetaskmain-pomedit > h3 { 
+        margin: 5px;
+    }
+        #activetaskmain-pomeditlist {
+            overflow-y: scroll;
+            height: 150px;
+            border-radius: 0px 5px 5px 0px;
+            margin: 15px 15px 15px 0px;
         }

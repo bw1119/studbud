@@ -47,23 +47,44 @@ header {
 }
 
 .activetaskpanel-topbig {
-    background-color: #eeaf7b;
+    background-color: #a7a7a7;
     width: 100%;
     height: 40px;
     border-radius: 39px 39px 0 0;
 }
 .activetaskpanel-topsmall {
-    background-color: #eeaf7b;
+    background-color: #a7a7a7;
     width: 100%;
     height: 20px;
     border-radius: 19px 19px 0 0;
 }
-.activetaskpanel {
+.activetaskpanel-lvl1 {
     border: 1px solid #bebebe;
     box-shadow: 1px 1px 3px #0000001A;
 }
 .activetaskpanel-lvl2 {
     border: 1px solid #999999;
+    border-radius: 20px;
+    background-color: #ffffff;
+}
+.activetaskpanel-lvl3 {
+    border: 1px solid #999999;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+#activetaskmain-pomedit {
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    border-left: none;
+    border-radius: 0px 10px 10px 0px;
+}
+#activetaskmain-pomeditlist {
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    border-left: none;
 }
 
 footer {    
