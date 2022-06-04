@@ -1,4 +1,5 @@
 // Active task section
+// Container
 #activetask-container {  
     display: grid;
     grid-template-columns: 0.4fr 1fr 0.4fr;
@@ -9,6 +10,7 @@
       "activetask-left activetask-main activetask-right";
     margin: 5% 10% 2.5% 10%;
 }
+    // Headings
     .activetaskmain-h1 {
         text-align: center;
         text-decoration: underline 3px;
@@ -34,6 +36,8 @@
         font-size: 1.15vw;
         font-weight: 400;
     }
+
+    // Div top decorations
     .activetaskpanel-topbig {
         margin-bottom: 5px;
     }
@@ -41,55 +45,56 @@
         margin-bottom: 5px;
     }
   
-    #activetask-main { 
-        background-color: #ffffff;
-        border-radius: 40px;
+// Main panel
+#activetask-main { 
+    background-color: #ffffff;
+    border-radius: 40px;
 
-        grid-area: activetask-main; 
-        width:100%;
-        height:100%;
+    grid-area: activetask-main; 
+    width:100%;
+    height:100%;
+}
+    // Edit button positioned around top right
+    #activetaskmain-editbutton {
+        position: relative;
+        right: 3%;
+        top: 24px;
+        float: right;
     }
-  
+
+    // Left side
     #activetask-left { 
         grid-area: activetask-left; 
+        display: block;
     }
-    #activetask-music {
-        background-color: #ffffff;
-        border-radius: 20px;
+        #activetask-stopwatch { 
+            background-color: #ffffff;
+            border-radius: 20px;
 
-        margin: 0px 20px 0px 20px;
-    }
-  
+            margin: 0px 20px 10px 20px;
+        }
+        #activetask-timer { 
+            background-color: #ffffff;
+            border-radius: 20px;
+            
+            margin: 10px 20px 0px 20px;
+        }
+
+    // Right side    
     #activetask-right {  
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: max-content max-content max-content;
-        gap: 10px 0px;
-        grid-auto-flow: row;
-        grid-template-areas:
-            "activetask-stopwatch"
-            "activetask-main-pomedit"
-            "activetask-timer";
+        display: block;
         grid-area: activetask-right;
     }
-    #activetask-stopwatch { 
-        background-color: #ffffff;
-        border-radius: 20px;
+        #activetask-music {
+            background-color: #ffffff;
+            border-radius: 20px;
 
-        grid-area: activetask-stopwatch; 
-        margin: 0px 20px 10px 20px;
-    }
-    #activetask-main-pomedit { 
-        background-color: #ffffff;
-        border-radius: 0px 10px 10px 0px;
+            margin: 0px 20px 0px 20px;
+        }
+        #activetaskmain-pomedit { 
+            background-color: #ffffff;
+            border-radius: 0px 10px 10px 0px;
 
-        grid-area: activetask-main-pomedit; 
-        width: 150px;
-    }
-    #activetask-timer { 
-        background-color: #ffffff;
-        border-radius: 20px;
-        
-        grid-area: activetask-timer; 
-        margin: 10px 20px 0px 20px;
-    }
+            width: 150px;
+            margin-top: 10px;
+        }

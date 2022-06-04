@@ -11,22 +11,9 @@
         font-weight: 600;
         margin-left: 25px;
     }
-    .dashboard-container-head {
-        display: inline;
-        width: 100%;
-        text-align: justify;
-    }
-    .dropdownbutton {
-        float: right;
-        margin: 10px 10px 0px 0px;
-        text-align: center;
-    }
-    .dashboard-containertop {
-        margin-bottom: 5px;
-    }
 
-// Holds the active task list
-#dashactivetasks-container {
+// Container for dash menus
+.dash-container {
     margin: 0px 15px 15px 15px;
     padding: 0px 0px 5px 0px;
 }
@@ -41,15 +28,25 @@
         opacity: 75%;
         margin-left: 10px;
     }
+    // Holds title and button
+    .dashboard-container-head {
+        display: inline;
+        width: 100%;
+        text-align: justify;
+    }
+        .dropdownbutton {
+            float: right;
+            margin: 10px 10px 0px 0px;
+            text-align: center;
+        }
+    // Top decoration
+    .dashboard-containertop {
+        margin-bottom: 5px;
+    }
+
 // Active task list
 #dashactivetasks {
     margin: 10px;
     display: flex;
     height: 300px;
-}
-
-// Holds the deleted task list
-#dashdeldtasks-container {
-    margin: 0px 15px 0px 15px;
-    padding: 0px 0px 5px 0px;
 }

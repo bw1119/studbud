@@ -7,7 +7,7 @@ header {
     background-color: #fff2e6bf;
     box-shadow: 1px 0px 3px #00000033;
 }
-    #dashactivetasks-container, #dashdeldtasks-container {
+    .dash-container {
         background-color: #FFF5EC;
         border: 1px solid #bebebe;
         border-radius: 10px;
@@ -27,6 +27,14 @@ header {
         border: 1px solid #999999;
         border-radius: 5px;
     }
+
+#taskadd-form {
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.kanban-entry {
+    box-shadow: 1px 1px 3px #0000001A;
+}
 
 #container {
     background-image: linear-gradient(#E1BFA2 0% 40%, #F5F2EB 60%);
@@ -49,6 +57,13 @@ header {
     width: 100%;
     height: 20px;
     border-radius: 19px 19px 0 0;
+}
+.activetaskpanel {
+    border: 1px solid #bebebe;
+    box-shadow: 1px 1px 3px #0000001A;
+}
+.activetaskpanel-lvl2 {
+    border: 1px solid #999999;
 }
 
 footer {    

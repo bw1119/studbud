@@ -23,7 +23,7 @@
       <br>
       
       <!-- Active tasks list-->
-      <div id="dashactivetasks-container">
+      <div class="dash-container">
         <div class="dashboard-containertop" id="dashactivetasks-containertop"></div>
         <div class="dashboard-container-head">
           <h4 class="dash-h4">Active tasks</h4>
@@ -39,7 +39,7 @@
       </div>
 
       <!-- Archived tasks list - incomplete -->
-      <div id="dashdeldtasks-container">
+      <div class="dash-container">
         <div class="dashboard-containertop" id="dashdeldtasks-containertop"></div>
         <div class="dashboard-container-head">
           <h4 class="dash-h4">Archived tasks</h4>
@@ -66,9 +66,11 @@
       <!-- Begin kanban container -->
       <div id="kanban-container">
 
+        <!-- Short tutorial for notes, disappears after interaction -->
+        <h2 class="instructions"><em>Move a note by dragging the top bar, click inside to make active</em></h2>
+
         <!-- Kanban head - with add task button -->
         <div id="kanban-head">
-
           <!-- Add task button -->
           <button id="taskadd-button" type="button">Add task</button>
           <!-- Begin task add menu, pops up on button press -->
@@ -118,9 +120,6 @@
         <!-- Begin kanban board-->
         <div id="kanban-board">
 
-          <ul id="tasklist">
-          </ul> 
-
         <!-- End kanban board -->
         </div>
         
@@ -133,30 +132,43 @@
 
         <!-- Left sidebar -->
         <div id="activetask-left">
-
-          <!-- Music player panel -->
-          <div id="activetask-music">
+          
+          <!-- Time elapsed panel -->
+          <div id="activetask-stopwatch" class="activetaskpanel">
             <div class="activetaskpanel-topsmall"></div>
-            <h2 class="activetaskpanel-h2"> Music player </h2>
+            <h2 class="activetaskpanel-h2"> Time elapsed </h2>
+            <div id="activetaskstopwatch-readout">
+            </div>
           </div>
-
+          
+          <!-- Time to completion panel -->
+          <div id="activetask-timer" class="activetaskpanel">
+            <div class="activetaskpanel-topsmall"></div>
+            <h2 class="activetaskpanel-h2"> Time to completion </h2>
+            <div id="activetasktimer-readout" class="activetaskpanel-lvl2">
+            
+            </div>
+            <div id="activetasktimer-due" class="activetaskpanel-lvl2">
+            
+            </div>
+          </div>
         </div>
 
         <!-- Main -->
-        <div id="activetask-main">
-          <div class="activetaskpanel-topbig"></div>
-          <div id="activetaskmain-editbutton"></div>
-
+        <div id="activetask-main" class="activetaskpanel">
+          <div class="activetaskpanel-topbig">          
+            <button id="activetaskmain-editbutton" class="editbutton"><i class="fa-solid fa-pen-to-square"></i></button>
+          </div>
           <h1 class="activetaskmain-h1"> Namey name </h1>
 
-          <div id="activetaskmain-pomodoro">
+          <div id="activetaskmain-pomodoro" class="activetaskpanel-lvl2">
             <h2 class="activetaskmain-h2"> Timer </h2>
           </div>
 
-          <div id="activetaskmain-checklist-container">
+          <div id="activetaskmain-checklist-container" class="activetaskpanel-lvl2">
             <h2 class="activetaskmain-h2"> Task list </h2>
 
-            <div id="activetaskmain-checklist">
+            <div id="activetaskmain-checklist" class="activetaskpanel-lvl3">
 
             </div>
             
@@ -167,36 +179,16 @@
         <!-- Right sidebar -->
         <div id="activetask-right">
 
-          <!-- Time elapsed panel -->
-          <div id="activetask-stopwatch">
+          <!-- Music player panel -->
+          <div id="activetask-music" class="activetaskpanel">
             <div class="activetaskpanel-topsmall"></div>
-            <h2 class="activetaskpanel-h2"> Time elapsed </h2>
-
-            <div id="activetaskstopwatch-readout">
-            
-            </div>
-
+            <h2 class="activetaskpanel-h2"> Music player </h2>
           </div>
 
           <!-- Pomodoro editor panel -->
-          <div id="activetask-main-pomedit">
+          <div id="activetaskmain-pomedit">
             <h3 class="activetaskpanel-h3"> Pomodoro </h3>
-          </div>
-
-          <!-- Time to completion panel -->
-          <div id="activetask-timer">
-            <div class="activetaskpanel-topsmall"></div>
-            <h2 class="activetaskpanel-h2"> Time to completion </h2>
-
-            
-            <div id="activetasktimer-readout">
-            
-            </div>
-
-            <div id="activetasktimer-due">
-            
-            </div>
-
+            <div id="activetaskmain-pomeditlist" class="activetaskpanel-lvl2"></div>
           </div>
 
         </div>
