@@ -36,7 +36,7 @@ var instructionsTxt = document.querySelector(".instructions");
 // Active task DOM
 var activeTaskMainTitle = document.querySelector(".activetaskmain-h1");
 var activeTaskMainTopType = document.querySelector(".activetaskpanel-topbig > h4");
-var activeTaskMainTitleSub = document.querySelector("#activetaskmainh1-priority");
+var activeTaskMainTitleSub = document.querySelector(".activetaskmainh1-priority");
   var activeTaskMainList = document.querySelector("#activetaskmain-entrypoint");
   var listItemAddButton = document.querySelector("#activetaskmain-addbutton");
 
