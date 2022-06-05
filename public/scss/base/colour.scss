@@ -36,6 +36,9 @@ header {
     box-shadow: 1px 1px 3px #0000001A;
 }
 
+main {
+    background-image: linear-gradient(#E1BFA2 0% 40%, #F5F2EB 60%);
+}
 #container {
     background-image: linear-gradient(#E1BFA2 0% 40%, #F5F2EB 60%);
 }
@@ -62,6 +65,10 @@ header {
     border: 1px solid #bebebe;
     box-shadow: 1px 1px 3px #0000001A;
 }
+    .activetaskpanel-lvl1a {
+        border: 1px solid #bebebe;
+        box-shadow: 1px 1px 3px #0000001A;
+    }
 .activetaskpanel-lvl2 {
     border: 1px solid #999999;
     border-radius: 20px;
@@ -71,6 +78,10 @@ header {
     border: 1px solid #999999;
     border-radius: 10px;
     background-color: #ffffff;
+}
+
+.tasklist-item {
+    border-bottom: 1px solid #999999;
 }
 
 #activetaskmain-pomedit {

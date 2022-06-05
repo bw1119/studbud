@@ -7,6 +7,36 @@
     line-height: 13px;
 }
 
+.kanban-column-addbtn, .kanban-column-delbtn {
+    border: none;
+    border-radius: 15px;
+    aspect-ratio: 1/1;
+    line-height: 13px;
+}
+    .kanban-column-delbtn {
+        color: transparent;
+        background-color: transparent;
+    }
+    .kanban-column-addbtn {
+        color: transparent;
+        background-color: transparent;
+        aspect-ratio: 1/1;
+        font-size: 20px;
+        font-weight: 600;
+    }
+    .kanban-column:hover > .kanban-column-delbtn {
+        background-color: #fff7f040;
+    }
+    .kanban-column:hover > div > .kanban-column-addbtn {
+        background-color: #fff7f040;
+    }
+        .kanban-column-delbtn:hover {
+            color: #ffffff;
+        }
+        .kanban-column-addbtn:hover {
+            color: #707070;
+        }
+
 #taskadd-button {
     background-color: #FF6E50;
     width: 140px;
@@ -27,7 +57,16 @@
     font-size: 1.25rem;
     padding: 0px 10px 0px 10px;
 }
-
+#activetasktimer-buttoncontainer > button {
+    background-color: #929292;
+    width: fit-content;
+    height: 30px;
+    border-radius: 15px;
+    color: #ffffff;
+    border: none;
+    font-size: 1rem;
+    padding: 0px 10px 0px 10px;
+}
 .editbutton {
     width: fit-content;
     height: 40px;
@@ -40,4 +79,15 @@
 }
 #activetaskmain-editbutton {
     background-color: #929292;
+}
+
+#activetaskmain-addbutton {
+    border: none;
+    border-radius: 50px;
+    aspect-ratio: 1/1;
+    width: 40px;
+    color: #707070;
+    line-height: 13px;
+    font-size: 1.75rem;
+    font-weight: 400;
 }

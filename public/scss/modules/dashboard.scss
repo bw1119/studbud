@@ -2,10 +2,12 @@
 #dashboard {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 0;    
     height: 100%;
     width: 275px;
     padding: 75px 0px 0px 0px;
+    z-index: 1000;
+    overflow: auto;
 }
     .dash-h3 {
         font-weight: 600;

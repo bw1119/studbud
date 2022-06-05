@@ -20,6 +20,7 @@
         color: #ffffff99;
         position: absolute;
         margin: 2.5%;
+        display: block;
     }
     #taskadd-button {
         align-self: flex-end;
@@ -37,9 +38,10 @@
     // Columns
     .kanban-column {
         width: 100%;
-        text-align: center;
         border-right: solid 1px white; 
         border-left: solid 1px white;
+        display: inline;
+        text-align: center;
     }
     // Column headings
     .kanban-column > h1 {
@@ -47,8 +49,19 @@
         font-size: 16px;
         font-size: 4vh;
         margin-bottom: 20px;
+        text-align:center;
         color: white;
         text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+    }
+    .kanban-column-addbtn {
+        float: right;
+        position: relative;
+        top: 250px;
+        left: 13px;
+    }
+    .kanban-column-delbtn {
+        position: relative;
+        //top: 0px;
     }
 
 // Individual notes

@@ -3,8 +3,11 @@
   <!-- Head - intrinsic stuff -->
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Task organiser for studying and general work">
+    <meta name="author" content="Ben Walker">
     <title>Task.it</title>
+    <link rel="icon" type="image/x-icon" href="./assets/brand/favicon-16.png">
 
     <link href="scss/main.scss" rel="stylesheet" type="text/css" /> 
 
@@ -90,7 +93,7 @@
 
               <!-- Date input -->
               <label for="dueDate">Due date</label>
-                <input type="date" name="dueDate" id="dueDateInput">
+                <input type="date" name="dueDate" id="dueDateInput" required>
 
               <!-- Est time to complete -->
               <label for="estimatedTime">Time to completion</label>
@@ -149,9 +152,15 @@
           <div id="activetask-timer" class="activetaskpanel-lvl1">
             <div class="activetaskpanel-topsmall"></div>
             <h2 class="activetaskpanel-h2"> Time to completion </h2>
+
+            <h3 id="activetasktimer-readout-days"></h3>
             <div id="activetasktimer-readout" class="activetaskpanel-lvl2">
               <div class="values">00:00:00</div>
             </div>
+              <div id="activetasktimer-buttoncontainer">
+                <button id="activetasktimerreadout-buttonadd1h">Add 1h</button>
+                <button id="activetasktimerreadout-buttonadd10m">Add 10m</button>
+              </div>
 
             <div id="activetasktimer-due" class="activetaskpanel-lvl2">
               <p><span style="font-weight:500">Due</span> date</p>
@@ -185,13 +194,17 @@
 
           </div>
 
-          <div id="activetaskmain-checklist-container" class="activetaskpanel-lvl1">
+          <div id="activetaskmain-checklist-container" class="activetaskpanel-lvl1a">
             <h2 class="activetaskmain-h2"> Task list </h2>
-
             <div id="activetaskmain-checklist" class="activetaskpanel-lvl3">
+              
+              <ul id="activetaskmain-entrypoint" role="listbox" tabindex="0" aria-label="email list">
 
-            </div>
-            
+              </ul>
+
+              <button id="activetaskmain-addbutton">+</button>
+            </div>        
+
           </div>
 
         </div>
@@ -203,6 +216,10 @@
           <div id="activetask-music" class="activetaskpanel-lvl1">
             <div class="activetaskpanel-topsmall"></div>
             <h2 class="activetaskpanel-h2"> Music player </h2>
+
+            <audio controls id="activetaskmusic-player">
+              <source src="assets/sfx/relaxingpiano.mp3" type="audio/mpeg">
+            </audio>
           </div>
 
           <!-- Pomodoro editor panel -->
@@ -211,8 +228,6 @@
             <div class="activetaskpanel-lvl2"  id="activetaskmain-pomeditlist">
               
             </div>
-            <input id="activetaskmain-pomedit-breaklength"></input>
-            <input id="activetaskmain-pomedit-worklength"></input>
           </div>
 
         </div>
