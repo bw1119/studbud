@@ -10,7 +10,7 @@
       "activetask-left activetask-main activetask-right";
     margin: 0 auto;
     margin-top: 7.5%;
-    margin-bottom: 2.5%;
+    margin-bottom: 20px;
 }
     // Headings
     .activetaskmain-h1 {
@@ -19,6 +19,11 @@
         font-size: 3.5rem;
         font-weight: 600;
     }
+        // Subtitle
+        #activetaskmainh1-priority {
+            text-align: center;
+            font-size: 1.1rem;
+        }
     .activetaskmain-h2 {
         text-align: center;
         font-size: 1.85rem;
@@ -73,7 +78,7 @@
     // Timer
     #activetaskmain-pomodoro {
         width: fit-content;
-        margin: 25px 100px 10px 100px;
+        margin: 25px 100px 30px 100px;
         border-radius: 20px;
         padding: 5px 25px 5px 25px;
     }
