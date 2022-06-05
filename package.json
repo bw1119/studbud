@@ -21,15 +21,15 @@
   "homepage": "https://github.com/bw1119/studbud#readme",
   "dependencies": {
     "easytimer.js": "^4.5.3",
-    "express": "^4.17.3",
+    "express": "^4.18.1",
     "interactjs": "^1.10.11",
     "lockr": "^0.9.0-beta.0",
-    "sass": "^1.50.0"
+    "sass": "^1.52.2"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.4.1",
+    "@parcel/transformer-sass": "^2.6.0",
     "autoprefixer": "^10.4.4",
-    "parcel": "^2.0.0-rc.0",
+    "parcel": "^2.6.0",
     "postcss": "^8.4.12"
   }
 }
