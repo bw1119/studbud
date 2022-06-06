@@ -91,3 +91,43 @@
     font-size: 1.75rem;
     font-weight: 400;
 }
+    #activetaskmain-openallbutton {
+        background-color: #929292;
+        width: fit-content;
+        height: 40px;
+        border-radius: 15px;
+        color: #ffffff;
+        border: none;
+        font-size: 1.5rem;
+        padding: 0px 10px 0px 10px;
+    }
+
+.tasklistitem-delbutton {
+    border: none;
+    border-radius: 50px;
+    aspect-ratio: 1/1;
+    width: 30px;
+    color: transparent;
+    background-color: transparent;
+    line-height: 13px;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.tasklist-item:hover > .tasklistitem-delbutton{
+    color: #707070;
+}
+.tasklistitem-openbutton {
+    border: none;
+    border-radius: 50px;
+    width: fit-content;
+    height:28px;
+    //color: transparent;
+    background-color: transparent;
+    color: #707070;
+    line-height: 13px;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.tasklistitem-openbutton:hover {
+    color: #313131;
+}

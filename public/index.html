@@ -142,16 +142,18 @@
           <div id="activetask-stopwatch" class="activetaskpanel-lvl1">
             <div class="activetaskpanel-topsmall"></div>
             <h2 class="activetaskpanel-h2"> Time elapsed </h2>
+            <p class="readout-disclaimer"> Updates every minute </p>
+
             <div id="activetaskstopwatch-readout" class="activetaskpanel-lvl2">
               <div class="values">00:00:00</div>
             </div>
-
           </div>
           
           <!-- Time to completion panel -->
           <div id="activetask-timer" class="activetaskpanel-lvl1">
             <div class="activetaskpanel-topsmall"></div>
             <h2 class="activetaskpanel-h2"> Time to completion </h2>
+            <p class="readout-disclaimer"> Updates every minute </p>
 
             <h3 id="activetasktimer-readout-days"></h3>
             <div id="activetasktimer-readout" class="activetaskpanel-lvl2">
@@ -179,7 +181,7 @@
           <p id="activetaskmainh1-priority"> Priority </h1>
 
           <div id="activetaskmain-pomodoro" class="activetaskpanel-lvl2">
-            <h2 class="activetaskmain-h2"> Timer </h2>
+            <h2 class="activetaskmain-h2"> Pomodoro timer </h2>
 
             <div id="maintimer">
               <div class="values">00:25:00</div>
@@ -199,15 +201,14 @@
             <h2 class="activetaskmain-h2"> Task list </h2>
             <div id="activetaskmain-checklist" class="activetaskpanel-lvl3">
               
-              <ul id="activetaskmain-entrypoint" role="listbox" tabindex="0" aria-label="email list">
+              <ul id="activetaskmain-entrypoint" role="listbox" aria-label="email list">
 
               </ul>
 
               <button id="activetaskmain-addbutton">+</button>
             </div>        
-
+            <button id="activetaskmain-openallbutton">Open all</button>
           </div>
-
         </div>
 
         <!-- Right sidebar -->

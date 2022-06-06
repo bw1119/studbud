@@ -15,7 +15,7 @@
     }
     .instructions {
         font-size: 16px;
-        font-size: 1vw;
+        //font-size: 1vw;
         font-weight: 300;
         color: #ffffff99;
         position: absolute;
@@ -83,13 +83,13 @@
         .kanban-entry-title {
             margin: 3%;
             font-size: 16px;
-            font-size: 0.85vw;
+            //font-size: 0.85vw;
             font-weight: 500;
         }
         .kanban-entry-duedate, .kanban-entry-priority {
             margin: 3%;
             font-size: 13px;
-            font-size: 0.68vw;
+            //font-size: 0.68vw;
         }
         .kanban-entry-priority {
             border-top: solid 1px #70707040;
