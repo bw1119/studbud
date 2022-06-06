@@ -60,10 +60,12 @@
     var timerAdd1HrBtn = document.querySelector('#activetasktimerreadout-buttonadd1h');
     var timerAdd10MinsBtn = document.querySelector('#activetasktimerreadout-buttonadd10m');
 
+  // Pomodoro edit panel
+  var activeTaskPomEditList = document.querySelector("#activetaskmainpomedit-entrypoint");
+
 // Kanban data
   var kanbanBoard = [];
   var kanbanEntries = [];
-  //var kanbanLists = [];
 
 // Timers
   var pomTimer;
@@ -120,6 +122,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Set default board state in local storage
     set('kanban_board', ['To-do', 'In-progress', 'Done', 'Future']);
+    /*
+    // Set default pomodoro state in local storage
+    set('pomodoro_setup', [
+      {type:'work', time:25},
+      {type:'break', time:5},
+      {type:'work', time:25},
+      {type:'break', time:5},
+      {type:'work', time:25},
+      {type:'break', time:5},
+      {type:'work', time:25},
+      {type:'break', time:30}
+    ]);
+    */
 
     // Push local storage to array
     kanbanBoard = get('kanban_board');
@@ -152,14 +167,6 @@ function kanbanInit(){
 
     // Check for existing kanban entries
     for (let i=0; i < kanbanEntries.length; i++) {
-      //Deprecated
-        // Find corresponding obj in checklist array, searching for the pure id (i.e. without 'task' prefix)
-        //console.log(kanbanLists);
-        //for(let y=0; y < kanbanLists.length; y++) {
-        //  if(kanbanLists[y].id = `list${kanbanEntries[i].id}`) {
-        //    correspondingArr = kanbanLists[y];
-        //  };
-        //};
       console.log(kanbanEntries[i]);
       // Render entry and inherit object
       renderTask(kanbanEntries[i]);
@@ -268,7 +275,7 @@ function renderTask(task){
       // Due date
       let duedate = document.createElement("p");
         duedate.className = 'kanban-entry-duedate';
-        duedate.innerHTML = `<span style="font-weight:500">Due</span>: ${task.dueDate.substring(5)}`;
+        duedate.innerHTML = `<span style="font-weight:500">Due</span>: ${(task.dueDate).substring(5)}`;
 
       // Priority
       let priority = document.createElement("p");
@@ -312,6 +319,13 @@ function renderTask(task){
     activeTaskMainListEmptySpace.innerHTML="";
     task.active = true;
     taskListInit(task);
+//    if(pomActive == false) {
+ //     pomActive = true;
+      for (let i=0; i < (task.pomodoroSetup).length; i++){
+        //console.log((task.pomodoroSetup).length);
+        initPomEdit(task, i);
+      }
+//  }
   });
 
   // Append new entry to board
@@ -490,9 +504,20 @@ function addTask(taskTitle, taskType, dueDate, estimatedTimeHours, estimatedTime
     active: false,
     // Elapsed time
     timeElapsed: 0,
+    // Checklist items
     items: {
 
-    }
+    },
+    pomodoroSetup: [
+      {type:'work', time:25},
+      {type:'break', time:5},
+      {type:'work', time:25},
+      {type:'break', time:5},
+      {type:'work', time:25},
+      {type:'break', time:5},
+      {type:'work', time:25},
+      {type:'break', time:30},
+    ]
   };
 
   // Save in localStorage
@@ -508,11 +533,54 @@ function addTask(taskTitle, taskType, dueDate, estimatedTimeHours, estimatedTime
 // - 
 /////////////////////////
 
+// Initialise Pomodoro Edit box
+function initPomEdit(task, pos) {
+    let pomListItem = document.createElement("li");
+    let pomListItemHead = document.createElement("h4");
+    let pomListItemMins = document.createElement("input");
+      pomListItemMins.setAttribute("type", "number");
+      pomListItemMins.setAttribute("min", "0");
+      pomListItemMins.setAttribute("max", "59");
+      pomListItemMins.className = "pomedititem-input"
+    let pomListItemMinsTxt = document.createElement("p");
+      pomListItemMinsTxt.textContent = "mins";
+
+      if((task.pomodoroSetup[pos]).type == "work") {
+        pomListItem.className = "pomedititem-work";
+        pomListItemHead.textContent = "Work";
+      } else {
+        pomListItem.className = "pomedititem-break";
+        pomListItemHead.textContent = "Break";
+      };
+
+    // Add event listeners
+    pomListItemMins.addEventListener("input", function(event){
+      event.preventDefault();
+      (task.pomodoroSetup[pos]).time = parseInt(pomListItemMins.value);
+      //console.log(parseInt(pomListItemMins.value))
+
+      for (let i=0; i < kanbanEntries.length; i++) {
+        if (kanbanEntries[i].id == task.id) {
+          kanbanEntries[i].pomodoroSetup = task.pomodoroSetup;
+          
+          set(task.id, kanbanEntries[i]);
+        };
+      };
+      console.log((task.pomodoroSetup[pos]).time);
+    });
+
+    pomListItemMins.setAttribute("placeholder", (task.pomodoroSetup[pos]).time);
+    pomListItem.appendChild(pomListItemHead);
+    pomListItem.appendChild(pomListItemMins);
+    pomListItem.appendChild(pomListItemMinsTxt);
+    activeTaskPomEditList.appendChild(pomListItem);
+};
+
 // Initialise activetask section
 function activetaskInit(task, isTypeReading){
   //DOM
   let mainEditButton = document.querySelector("#activetaskmain-editbutton");
-  let timerButtons = document.querySelectorAll("#timerbuttons-container > button, #activetasktimer-buttoncontainer > button");
+  let timerButtons = document.querySelectorAll("#timerbuttons-container > button, #activetasktimer-buttoncontainer > button,#activetaskstopwatch-buttoncontainer > button");
   let backgroundsLvl1 = document.querySelectorAll(".activetaskpanel-lvl1");
     let backgroundsLvl1a = document.querySelector(".activetaskpanel-lvl1a");
 
@@ -622,6 +690,10 @@ function pomodoroInit(task) {
     // Pomodoro
     document.querySelector('#maintimer > .values').textContent = `${pomTimer.getTimeValues()}`;
   });
+  pomTimer.addEventListener('targetAchieved', function (e) {
+    
+  });
+  
 
   otherTimersInit(task);
 }
@@ -641,7 +713,6 @@ function otherTimersInit(task) {
     stopwatchStartBtn.addEventListener('click', function(e) {
       // Pomodoro
       stopWatch.start();
-      document.querySelector('#activetasktimer-readout > .values').textContent = `${stopWatch.getTimeValues()}`;
     });
     stopwatchPauseBtn.addEventListener('click', function(e) {
       // Stopwatch
@@ -651,6 +722,10 @@ function otherTimersInit(task) {
       // Pomodoro
       stopWatch.reset();
       stopWatch.pause();
+      document.querySelector('#activetaskstopwatch-readout > .values').textContent = `${stopWatch.getTimeValues()}`;
+      task.timeElapsed = 0;
+        // Push new elapsed time to array and push updated object to localStorage
+        searchAndReplace(kanbanEntries, task, "timeElapsed");
     });
 
 

@@ -120,7 +120,6 @@
             margin: 25px;
             text-align: center;
         }
-
 #activetaskmain-entrypoint {
     text-align: left;
     list-style: none;
@@ -260,7 +259,50 @@
     }
         #activetaskmain-pomeditlist {
             overflow-y: scroll;
-            height: 150px;
+            height: 200px;
             border-radius: 0px 5px 5px 0px;
             margin: 15px 15px 15px 0px;
+        }
+        #activetaskmainpomedit-entrypoint {
+            text-align: left;
+            list-style: none;
+            padding: 0px;
+        }
+    .pomedititem-work {
+        padding: 2.5px 0px 2.5px 0px
+    }
+        .pomedititem-work > h4 {
+            font-size: 0.9rem;
+            padding-top:2px;
+            padding-left: 5px;
+            line-height:0.9rem;
+            font-weight: 500;
+        }
+        .pomedititem-work > p {
+            font-size: 0.8rem;
+            display: inline;
+            padding-left: 5px;
+            margin-bottom: 3px;
+        }
+    .pomedititem-break {
+        
+    }
+        .pomedititem-break > h4 {
+            font-size: 0.9rem;
+            padding-top:2px;
+            padding-left: 5px;
+            line-height:0.9rem;
+            font-weight: 500;
+        }
+        .pomedititem-break > p {
+            font-size: 0.8rem;
+            display: inline;
+            padding-left: 5px;
+            margin-bottom: 3px;
+        }
+        .pomedititem-input {
+            width: fit-content;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            margin-bottom: 3px;
         }
