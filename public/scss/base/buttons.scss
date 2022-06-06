@@ -57,6 +57,7 @@
     font-size: 1.25rem;
     padding: 0px 10px 0px 10px;
 }
+
 #activetasktimer-buttoncontainer > button {
     background-color: #929292;
     width: fit-content;
@@ -67,6 +68,18 @@
     font-size: 1rem;
     padding: 0px 10px 0px 10px;
 }
+
+#activetaskstopwatch-buttoncontainer > button {
+    background-color: #929292;
+    width: fit-content;
+    height: 30px;
+    border-radius: 15px;
+    color: #ffffff;
+    border: none;
+    font-size: 1rem;
+    padding: 0px 10px 0px 10px;
+}
+
 .editbutton {
     width: fit-content;
     height: 40px;

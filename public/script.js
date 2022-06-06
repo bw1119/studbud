@@ -39,9 +39,10 @@
   var activeTaskMainTitle = document.querySelector(".activetaskmain-h1");
   var activeTaskMainTopType = document.querySelector(".activetaskpanel-topbig > h4");
   var activeTaskMainTitleSub = document.querySelector("#activetaskmainh1-priority");
-    var activeTaskMainList = document.querySelector("#activetaskmain-entrypoint");
+  var activeTaskMainListContainer = document.querySelector("#activetaskmain-checklist");
+    var activeTaskMainListEmptySpace = document.querySelector("#activetaskmain-checklistemptyspace");
+  var activeTaskMainList = document.querySelector("#activetaskmain-entrypoint");
     // List
-    var listItemAddButton = document.querySelector("#activetaskmain-addbutton");
     var listItemOpenAllButton = document.querySelector("#activetaskmain-openallbutton");
 
   // Pomodoro timer
@@ -49,17 +50,20 @@
   var pomodoroPauseBtn = document.querySelector('#timerbuttons-container > .pauseButton');
   var pomodoroResetBtn = document.querySelector('#timerbuttons-container > .resetButton');
 
+  // Time elapsed panel
+  var stopwatchStartBtn = document.querySelector('#activetaskstopwatch-buttoncontainer > .startButton');
+  var stopwatchPauseBtn = document.querySelector('#activetaskstopwatch-buttoncontainer > .pauseButton');
+  var stopwatchResetBtn = document.querySelector('#activetaskstopwatch-buttoncontainer > .resetButton');
+
   // Time to complete panel
   var activeTaskTimerDueDate = document.querySelector("#activetasktimer-due > p");
-
-  // Estimated time panel
-  var timerAdd1HrBtn = document.querySelector('#activetasktimerreadout-buttonadd1h');
-  var timerAdd10MinsBtn = document.querySelector('#activetasktimerreadout-buttonadd10m');
+    var timerAdd1HrBtn = document.querySelector('#activetasktimerreadout-buttonadd1h');
+    var timerAdd10MinsBtn = document.querySelector('#activetasktimerreadout-buttonadd10m');
 
 // Kanban data
   var kanbanBoard = [];
   var kanbanEntries = [];
-  var kanbanLists = [];
+  //var kanbanLists = [];
 
 // Timers
   var pomTimer;
@@ -95,19 +99,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Push kanbanEntries from locStorage to global array, ignoring list and board data
     for (let i=0; i < localStorage.length; i++) {
-      if (localStorage.key(i) != "kanban_board" && (localStorage.key(i)).substring(0,4) != "list") {
+      if (localStorage.key(i) != "kanban_board") {
         kanbanEntries.push(get(localStorage.key(i)));
       }; 
     };
 
-    // Push kanbanLists from locStorage to global array, if has list prefix
-    for (let i=0; i < localStorage.length; i++) {
-      if ((localStorage.key(i)).substring(0,4) == "list") {
-        kanbanLists.push(get(localStorage.key(i)));
-      };
-    };
+    // Deprecated
+      // Push kanbanLists from locStorage to global array, if has list prefix
+      //for (let i=0; i < localStorage.length; i++) {
+      //  if ((localStorage.key(i)).substring(0,4) == "list") {
+      //    kanbanLists.push(get(localStorage.key(i)));
+      //  };
+      //};
     console.log(kanbanEntries)
-    console.log(kanbanLists)
 
   // If local storage is empty
   } else {  
@@ -148,18 +152,17 @@ function kanbanInit(){
 
     // Check for existing kanban entries
     for (let i=0; i < kanbanEntries.length; i++) {
-      let correspondingArr;
-      // Find corresponding obj in checklist array, searching for the pure id (i.e. without 'task' prefix)
-      console.log(kanbanLists);
-      for(let y=0; y < kanbanLists.length; y++) {
-        if(kanbanLists[y].id = `list${kanbanEntries[i].id}`) {
-          correspondingArr = kanbanLists[y];
-        };
-      };
-      console.log(correspondingArr);
+      //Deprecated
+        // Find corresponding obj in checklist array, searching for the pure id (i.e. without 'task' prefix)
+        //console.log(kanbanLists);
+        //for(let y=0; y < kanbanLists.length; y++) {
+        //  if(kanbanLists[y].id = `list${kanbanEntries[i].id}`) {
+        //    correspondingArr = kanbanLists[y];
+        //  };
+        //};
       console.log(kanbanEntries[i]);
       // Render entry and inherit object
-      renderTask(kanbanEntries[i], correspondingArr);
+      renderTask(kanbanEntries[i]);
     }
   });
 };
@@ -234,7 +237,7 @@ function kanbanRenderColumn(i, testIfNew){
 }
 
 // Add the new task to the html, with DOM
-function renderTask(task, taskBreakdown){
+function renderTask(task){
   // Create HTML elements
   // Base container div
   let item = document.createElement("div");
@@ -300,15 +303,15 @@ function renderTask(task, taskBreakdown){
       task => task.id === Number(id)
       );
     console.log(index)
-    console.log(taskBreakdown)
-    removeItem(task, index, taskBreakdown);
+    console.log(task.items)
+    removeItem(task, index);
     item.remove();
   });
   activateButton.addEventListener("click", function(event){
-    event.preventDefault();
-    //let id = event.target.parentElement.getAttribute('data-id');
-    activetaskInit(task, taskBreakdown);
+    activeTaskMainList.innerHTML="";
+    activeTaskMainListEmptySpace.innerHTML="";
     task.active = true;
+    taskListInit(task);
   });
 
   // Append new entry to board
@@ -319,13 +322,11 @@ function renderTask(task, taskBreakdown){
 }
 
 // Remove deleted task from array + local storage, and do the same for corresponding checklist 
-function removeItem(task, index, taskBreakdown) {
+function removeItem(task, index) {
   if (index > -1){
     kanbanEntries.splice(index, 1);
-    kanbanLists.splice(index, 1);
   }
   rm(task.id);
-  rm(taskBreakdown.id);
 }
 
 
@@ -433,6 +434,7 @@ function dragMoveListener (event) {
   target.setAttribute('data-y', y)
 }
 
+
 /////////////////////////
 // Handling task add functions
 // - EventListeners for form buttons
@@ -461,8 +463,6 @@ form.addEventListener("submit", function(event){
   
   // Call addTask() - add recorded task elements to GUI list and array
   addTask(task, taskType, dueDate, estimatedTimeHours, estimatedTimeMins,  priorityRating, false);
-
-  //taskAddForm.style.display = "none";
 });
 
 // Push new task to array, render on client
@@ -494,36 +494,14 @@ function addTask(taskTitle, taskType, dueDate, estimatedTimeHours, estimatedTime
 
     }
   };
-  //  let taskBreakdown = {
-  //      id: `list${task.id}`,
-  //      items: {
-  //        
-  //      }
-  //  };
 
-    console.log(taskBreakdown);
-    console.log(task);
   // Save in localStorage
   set(task.id, task);
-  console.log(localStorage);
-    set(taskBreakdown.id, taskBreakdown);
-
   kanbanEntries.push(task);
-  kanbanLists.push(taskBreakdown);
-  console.log(kanbanLists);
-    // DEV: log array list
-    console.log(kanbanEntries);
-    console.log(kanbanLists);
   
-  renderTask(task, taskBreakdown);
+  renderTask(task);
 };
 
-//function pxToPercent(axis, inputNo) {
-//  let result = inputNo / axis * 100;
-//  console.log(result);
-
-//  return result;
-//}
 
 /////////////////////////
 // Handling general activetask section render functionality
@@ -531,13 +509,16 @@ function addTask(taskTitle, taskType, dueDate, estimatedTimeHours, estimatedTime
 /////////////////////////
 
 // Initialise activetask section
-function activetaskInit(task, taskBreakdown){
-  let isTypeReading = false;
+function activetaskInit(task, isTypeReading){
   //DOM
   let mainEditButton = document.querySelector("#activetaskmain-editbutton");
   let timerButtons = document.querySelectorAll("#timerbuttons-container > button, #activetasktimer-buttoncontainer > button");
   let backgroundsLvl1 = document.querySelectorAll(".activetaskpanel-lvl1");
     let backgroundsLvl1a = document.querySelector(".activetaskpanel-lvl1a");
+
+  let listItemAddButton = document.createElement("button")
+  listItemAddButton.id = "activetaskmain-addbutton";
+  listItemAddButton.textContent = "+";
 
   // Change text elements
   activeTaskMainTitle.textContent = task.taskTitle;
@@ -564,36 +545,37 @@ function activetaskInit(task, taskBreakdown){
     };
 
   activeTaskTimerDueDate.innerHTML = `<span style="font-weight:500">Due</span>: ${task.dueDate.substring(5)}`;
+  activeTaskMainListEmptySpace.appendChild(listItemAddButton);
 
   // Scroll down to section
   document.getElementById('activetask-container').scrollIntoView();
-
-  if(task.type = "Reading") {
-    isTypeReading = true;
-    listItemOpenAllButton.style.backgroundColor = `hsl(${task.colourCode}, 65%)`
-  }
-
-  pomodoroInit(task);
-  taskListInit(taskBreakdown, isTypeReading);
-  
   // Event listeners
   // Add list item button
   listItemAddButton.addEventListener("click", function(){
-    let identifier = Date.now().toString();
-    let subId = identifier.substring((identifier.length)/2);
-    console.log(subId);
-    taskBreakdown['items'][subId] = ""; 
-    console.log(taskBreakdown);
-    const checklistCount = Object.keys(taskBreakdown.items).length;
-    taskListRender(taskBreakdown, subId, false, checklistCount, isTypeReading);
-  }); 
+    addList(task, isTypeReading);
+  });
 
+  pomodoroInit(task);
+};
+
+function addList(task, isTypeReading) {
+  let identifier = Date.now().toString();
+  let subId = identifier.substring((identifier.length)/2);
+    console.log(subId);
+    console.log(task);
+  task.items[subId] = "New list item"; 
+  set(task.id, task);
+    console.log(task.items);
+  const checklistCount = Object.keys(task.items).length;
+    console.log(checklistCount);
+    console.log(kanbanEntries);
+  taskListRender(task, subId, isTypeReading);
 };
 
 // Initialise Pomodoro timer
 function pomodoroInit(task) {
   pomTimer = new Timer({precision: 'seconds', countdown: true, startValues: {minutes: 25}});
-  stopWatch = new Timer({precision: 'minutes', startValues: {minutes: task.timeElapsed}});  
+  stopWatch = new Timer({precision: 'seconds', startValues: {minutes: task.timeElapsed}});  
   timerToComplete = new Timer({precision: 'minutes', countdown: true, startValues: {hours:task.estimatedTimeHours, minutes: task.estimatedTimeMins}});  
   
   // DOM
@@ -601,7 +583,7 @@ function pomodoroInit(task) {
   pomodoroStartBtn.addEventListener('click', function(e) {
     // Pomodoro
     pomTimer.start();
-    document.querySelector('#activetaskstopwatch-readout > .values').textContent = `${stopWatch.getTimeValues()}`;
+    stopWatch.start();
     document.querySelector('#activetasktimer-readout > .values').textContent = `${timerToComplete.getTimeValues()}`;
   });
   pomodoroPauseBtn.addEventListener('click', function(e) {
@@ -647,14 +629,30 @@ function pomodoroInit(task) {
 // Initialise other timers
 function otherTimersInit(task) {
   // DOM
+
   // Stopwatch
-  stopWatch.addEventListener('minutesUpdated', function (e) {
+  stopWatch.addEventListener('secondsUpdated', function (e) {
     // Stopwatch
     document.querySelector('#activetaskstopwatch-readout > .values').textContent = `${stopWatch.getTimeValues()}`;
     task.timeElapsed++;
       // Push new elapsed time to array and push updated object to localStorage
       searchAndReplace(kanbanEntries, task, "timeElapsed");
   });
+    stopwatchStartBtn.addEventListener('click', function(e) {
+      // Pomodoro
+      stopWatch.start();
+      document.querySelector('#activetasktimer-readout > .values').textContent = `${stopWatch.getTimeValues()}`;
+    });
+    stopwatchPauseBtn.addEventListener('click', function(e) {
+      // Stopwatch
+      stopWatch.pause();
+    });
+    stopwatchResetBtn.addEventListener('click', function(e) {
+      // Pomodoro
+      stopWatch.reset();
+      stopWatch.pause();
+    });
+
 
   // Time to complete
   timerToComplete.addEventListener('minutesUpdated', function (e) {
@@ -680,64 +678,104 @@ function otherTimersInit(task) {
     });
 };
 
-function taskListInit(taskBreakdown, isTypeReading) {
-  activeTaskMainList.innerHTML="";
-  console.log(Object.keys(taskBreakdown.items).length);
-  const checklistCount = Object.keys(taskBreakdown.items).length;
+function taskListInit(task) {
+  let isTypeReading = false;
 
+  if(task.taskType == "Reading") {
+    isTypeReading = true;
+  }
+
+  console.log(Object.keys(task.items).length);
+  let increment = 0;
   // Check if we have entries
-  if(Object.keys(taskBreakdown).length > 1) {
-    const taskKey = Object.keys(taskBreakdown.items);
+  if(Object.keys(task.items).length > 0) {
+    const taskKey = Object.keys(task.items);
+    console.log(taskKey);
     // Check for existing kanban entries
-    for (let i=0; i < Object.keys(taskBreakdown.items).length; i++) {
+    for (let i=0; i < Object.keys(task.items).length; i++) {
       // Render and log id
-      taskListRender(taskBreakdown, taskKey[i], true, checklistCount, isTypeReading);
+      increment++;
+      console.log(`loop no${increment}`)
+      console.log(taskKey[i]);
+      taskListRender(task, taskKey[i], isTypeReading);
     };
+  } else {
+    console.log("none found. returning to base!");
   };
+
+  activetaskInit(task, isTypeReading);
 };
 
 // Render a list entry
-function taskListRender(taskBreakdown, taskKey, testPreExist, pos, isTypeReading) {
-  console.log(taskBreakdown['items'][taskKey]);
-  //console.log(task);
+function taskListRender(task, taskKey, isTypeReading) {
+  console.log(task.items[taskKey]);
+
   // Create HTML elements
   let listItem = document.createElement("li");
   listItem.className = "tasklist-item";
     listItem.setAttribute('role', 'option');
-    //listItem.setAttribute('tabindex', -1);
     listItem.setAttribute('aria-checked', 'false');
 
   let listItemInput = document.createElement("input");
   listItemInput.className = "tasklistitem-input";
     listItemInput.setAttribute('type', 'checkbox');
-    //listItemInput.setAttribute('tabindex', -1);
 
   let listItemDelBtn = document.createElement("button");
   listItemDelBtn.className = "tasklistitem-delbutton";
   listItemDelBtn.textContent="✕";
-  //listItemDelBtn.setAttribute('tabindex', -1);
 
-  // Check if this is type reading to see if we underline the entries or not
-  let listItemInputContent;
-  let listItemInputContentOpenBtn;
+
+  // Init vars for type reading
+    let listItemInputContent;
+    let listItemInputContentOpenBtn;
+  // Check if this is type reading
   if( isTypeReading ) {
+    // Underlined link
     listItemInputContent = document.createElement("a");
     listItemInputContent.className = "tastklistitem-content_underline";
     listItemInputContent.setAttribute('href', '');
+      // Open link button
       listItemInputContentOpenBtn = document.createElement("button");
       listItemInputContentOpenBtn.className = "tasklistitem-openbutton";
       listItemInputContentOpenBtn.textContent="Open";
+
+    // Open link on click
+    listItemInputContentOpenBtn.addEventListener("click", function() {
+      window.open(task.items[taskKey]);
+    });
+    // Open all links on click (pop-up blockers block this!!!)
+    listItemOpenAllButton.addEventListener("click", function() {
+      const taskKey = Object.values(task.items)
+      console.log(taskKey);
+      for (let i=0; i < taskKey.length; i++) {
+        window.open(taskKey[i]);
+      };
+    });
+
+    // Append
+    listItem.appendChild(listItemInputContentOpenBtn);
+
+    // Unhide open all button
+    listItemOpenAllButton.style.display = "block";
+    let allLinks = document.querySelectorAll(".tastklistitem-content_subtitle");
+      
+    listItemOpenAllButton.style.backgroundColor=`hsl(${task.colourCode}, 65%)`;
   } else {
+    // Note instead of link
     listItemInputContent = document.createElement("h1");
     listItemInputContent.className = "tastklistitem-content";
+
+    // Hide open all button
+    listItemOpenAllButton.style.display = "none";
   };
 
-  if( testPreExist ) {
-    listItemInputContent.textContent = taskBreakdown['items'][taskKey];
-  } else {
-    listItemInputContent.textContent = "New list item";
-  }
+    listItemInputContent.textContent = task.items[taskKey];
     listItemInputContent.setAttribute("contenteditable", "true");
+
+  listItem.appendChild(listItemInput);
+  listItem.appendChild(listItemInputContent);
+  listItem.appendChild(listItemDelBtn);
+  activeTaskMainList.appendChild(listItem);
 
   // Event Listeners for DOM elements
   listItemInput.addEventListener("click", function() {
@@ -747,46 +785,19 @@ function taskListRender(taskBreakdown, taskKey, testPreExist, pos, isTypeReading
     console.log("test");
   });
   listItemInputContent.addEventListener("input", function(){
-    taskBreakdown['items'][taskKey] = listItemInputContent.textContent;
+    task.items[taskKey] = listItemInputContent.textContent;
     // Update array + local storage
-    searchAndReplace3D(kanbanLists,taskBreakdown,taskKey,"items");
-    //for (let i=0; i < kanbanLists.length; i++) {
-    //  if (kanbanLists[i][0].id == taskBreakdown[0].id) {
-    //    kanbanLists[i].taskKey = taskBreakdown[pos].taskKey;
-  
-    //    set(taskBreakdown[0].id, kanbanLists[i]);
-    //  };
-    //};
+    searchAndReplace3D(kanbanEntries,task,taskKey);
   });
   listItemDelBtn.addEventListener("click", function(event) {
-    delete taskBreakdown['items'][taskKey];
-    set(taskBreakdown.id, taskBreakdown);
     listItem.remove();
-  });
+    delete task.items[taskKey];
+    searchAndReplace(kanbanEntries, task, "items");  });
 
-  // Check if this is type reading
-  if(isTypeReading) {
-    // Unhide open all button
-    listItemOpenAllButton.style.display = "block";
-
-    let allLinks = document.querySelectorAll(".tastklistitem-content_subtitle");
-    
-    // Open all links on click
-    listItemOpenAllButton.addEventListener("click", function() {
-      for(let i=0; i < allLinks.length; i++) {
-        console.log(allLinks[i]);
-          window.open(allLinks[i].textContent);
-        };
-    });
-  }
-
-  listItem.appendChild(listItemInput);
-  listItem.appendChild(listItemInputContent);
-  listItem.appendChild(listItemDelBtn);
-  listItem.appendChild(listItemInputContentOpenBtn);
-  activeTaskMainList.appendChild(listItem);
+  task.items[taskKey] = listItemInputContent.textContent;
+  // Update array + local storage
+  searchAndReplace3D(kanbanEntries,task,taskKey);
 }
-
 
 /////////////////////////
 // MISC
@@ -797,19 +808,17 @@ function taskListRender(taskBreakdown, taskKey, testPreExist, pos, isTypeReading
 function searchAndReplace(arr, task, target) {
   for (let i=0; i < arr.length; i++) {
     if (arr[i].id == task.id) {
-      `arr[i].${target} = task.${target}`;
-
+      arr[i][target] = task[target];
+      
       set(task.id, arr[i]);
     };
   };
 };
-// 3D version for list array
-function searchAndReplace3D(arr, task, target, pos) {
+// 3D version for list.items
+function searchAndReplace3D(arr, task, target) {
   for (let i=0; i < arr.length; i++) {
     if (arr[i].id == task.id) {
-      console.log(`arr[i].${target}`);
-      `arr[i].${target} = task['pos'][${target}]`;
-      console.log(`arr[i].${target}`);
+      arr[i].items[target] = task.items[target];
 
       set(task.id, arr[i]); 
     };

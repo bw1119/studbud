@@ -142,11 +142,18 @@
           <div id="activetask-stopwatch" class="activetaskpanel-lvl1">
             <div class="activetaskpanel-topsmall"></div>
             <h2 class="activetaskpanel-h2"> Time elapsed </h2>
-            <p class="readout-disclaimer"> Updates every minute </p>
 
             <div id="activetaskstopwatch-readout" class="activetaskpanel-lvl2">
               <div class="values">00:00:00</div>
             </div>
+
+            <div id="activetaskstopwatch-buttoncontainer">
+              <button class="startButton">Start</button>
+              <button class="pauseButton" >Pause</button>
+              <!-- <button class="stopButton">Stop</button> -->
+              <button class="resetButton">Reset</button>
+            </div>
+
           </div>
           
           <!-- Time to completion panel -->
@@ -200,12 +207,12 @@
           <div id="activetaskmain-checklist-container" class="activetaskpanel-lvl1a">
             <h2 class="activetaskmain-h2"> Task list </h2>
             <div id="activetaskmain-checklist" class="activetaskpanel-lvl3">
-              
               <ul id="activetaskmain-entrypoint" role="listbox" aria-label="email list">
 
               </ul>
 
-              <button id="activetaskmain-addbutton">+</button>
+              <div id="activetaskmain-checklistemptyspace"></div>
+
             </div>        
             <button id="activetaskmain-openallbutton">Open all</button>
           </div>
