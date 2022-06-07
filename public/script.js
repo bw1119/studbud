@@ -5,9 +5,6 @@
   import { Timer } from "easytimer.js";
   // Interact, for notes
   import interact from 'interactjs'
-  // Howler, for music
-  import {Howl, Howler} from 'howler';
-
 
 ///
 // Variables
