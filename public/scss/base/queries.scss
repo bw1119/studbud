@@ -49,8 +49,20 @@
             font-size: 1.5rem;
             margin: 5px 0px 5px 0px;
         }
+        #taskadd-form > input {
+            height: 50px;
+            color: #707070;
+            font-size: 1.1rem;
+        }
         #taskadd-form > select {
-            font-size: 1.1rem
+            font-size: 1.1rem;
+            color: #707070;
+            height: 50px;
+        }
+        #estimatedTime-container > input {
+            width: 75px;
+            color: #707070;
+            height: 50px;
         }
         #estimatedTime-container > input, p {
             font-size:1.1rem;
