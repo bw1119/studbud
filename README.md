@@ -4,15 +4,15 @@
 
 ## Desktop
 
-![Mockup - desktop](/doc/images/mockup/Desktop_Active.png)
+![Mockup - desktop](/doc/images/mockups/Desktop_Active.png)
 
-![Mockup - desktop](/doc/images/mockup/Desktop_Board.png)
+![Mockup - desktop](/doc/images/mockups/Desktop_Board.png)
 
 ## Mobile
 
-![Mockup - mobile](/doc/images/mockup/Mobile_Active.png)
+![Mockup - mobile](/doc/images/mockups/Mobile_Active.png)
 
-![Mockup - mobile](/doc/images/mockup/Mobile_Board.png)
+![Mockup - mobile](/doc/images/mockups/Mobile_Board.png)
 
 
 ## Prototype 1
