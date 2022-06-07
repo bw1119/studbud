@@ -7,20 +7,16 @@
     // Kanban header, holds addtask button
     #kanban-head {
         margin: 25px 0px 25px 0px;
-        padding: 0% 5% 0% 5%;
+        padding: 0% 5% 0% 2.5%;
         display: flex;
+        justify-content: space-between;
+        align-items: center;
         flex-direction: row-reverse;
-        //align-items: flex-end;
-        flex-wrap: nowrap;
     }
     .instructions {
         font-size: 16px;
-        //font-size: 1vw;
         font-weight: 300;
         color: #ffffff99;
-        position: absolute;
-        margin: 2.5%;
-        display: block;
     }
     #taskadd-button {
         align-self: flex-end;
@@ -72,6 +68,7 @@
     flex-direction: column;
     position: absolute;
     text-align: left;
+    user-select: none;
 }
     .kanban-entry-textcontainer {
         height: 88%;

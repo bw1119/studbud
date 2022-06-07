@@ -1,16 +1,53 @@
 // Modules
-  // Lockr, makes it easier to handle localStorage for tasks
+  // Lockr, for easier localStorage handling
   import { set, get, rm } from 'Lockr';
   // Easytimer, for the pomodoro timer
   import { Timer } from "easytimer.js";
   // Interact, for notes
   import interact from 'interactjs'
+  // Howler, for music
+  import {Howl, Howler} from 'howler';
+
 
 ///
 // Variables
 ///
 
 // DOM variable setups
+  // Dashboard
+  // Archived tasks
+  var dashDeldTasksList = document.querySelector("#dashdeldtasks-list");
+  var dashDeldTasksBtn = document.querySelector("#dashdeldtasks-revealbutton")
+    // Button that hides/reveals deldtaskslist container
+    let dashDeldTasksBtnTest = true;
+    dashDeldTasksBtn.addEventListener("click", function() {
+      if(dashDeldTasksBtnTest == true) {
+        document.querySelector("#dashdeldtasks").style.display = "none"
+        dashDeldTasksBtnTest = false;
+        dashDeldTasksBtn.textContent = "◂"
+      } else {
+        document.querySelector("#dashdeldtasks").style.display = "block"
+        dashDeldTasksBtnTest = true;
+        dashDeldTasksBtn.textContent = "▾"
+      }
+    });
+  // Active tasks
+  var dashActiveTasksList = document.querySelector("#dashactivetasks-list");
+  var dashActiveTasksBtn = document.querySelector("#dashactivetasks-revealbutton")
+    // Button that hides/reveals activetaskslist container
+    let dashActiveTasksBtnTest = true;
+    dashActiveTasksBtn.addEventListener("click", function() {
+      if(dashActiveTasksBtnTest == true) {
+        document.querySelector("#dashactivetasks").style.display = "none"
+        dashActiveTasksBtnTest = false;
+        dashActiveTasksBtn.textContent = "◂"
+      } else {
+        document.querySelector("#dashactivetasks").style.display = "block"
+        dashActiveTasksBtnTest = true;
+        dashActiveTasksBtn.textContent = "▾"
+      }
+    });
+
   // Taskadd form DOM
   const form = document.getElementById("taskadd-form");
   var taskAddBtn = document.getElementById("taskadd-button");
@@ -66,6 +103,7 @@
 // Kanban data
   var kanbanBoard = [];
   var kanbanEntries = [];
+  var kanbanArchivedEntries = [];
 
 // Timers
   var pomTimer;
@@ -168,6 +206,9 @@ function kanbanInit(){
     // Check for existing kanban entries
     for (let i=0; i < kanbanEntries.length; i++) {
       console.log(kanbanEntries[i]);
+      if(kanbanEntries[i].active == true) {
+        addActiveItem(kanbanEntries[i]);
+      }
       // Render entry and inherit object
       renderTask(kanbanEntries[i]);
     }
@@ -311,21 +352,28 @@ function renderTask(task){
       );
     console.log(index)
     console.log(task.items)
-    removeItem(task, index);
     item.remove();
+    removeItem(task, index);
   });
   activateButton.addEventListener("click", function(event){
     activeTaskMainList.innerHTML="";
     activeTaskMainListEmptySpace.innerHTML="";
     task.active = true;
+    let currentActiveTasks = document.querySelectorAll("#dashactivetasks-list > .dashactivetasks-item");
+
+    let isTaskInActiveList = false;
+    for(i=0;i<currentActiveTasks.length;i++) {
+      if(currentActiveTasks[i].getAttribute('data-id') == task.id) {
+        isTaskInActiveList = true;
+      } 
+    }
+    if(isTaskInActiveList = false) {
+      addActiveItem(task);
+    }
+
     taskListInit(task);
-//    if(pomActive == false) {
- //     pomActive = true;
-      for (let i=0; i < (task.pomodoroSetup).length; i++){
-        //console.log((task.pomodoroSetup).length);
-        initPomEdit(task, i);
-      }
-//  }
+
+    searchAndReplace(kanbanEntries, task, "active");
   });
 
   // Append new entry to board
@@ -335,22 +383,86 @@ function renderTask(task){
   form.reset();
 }
 
+// Add active task to active list (unfinished)
+function addActiveItem(task) {
+  // DOM
+  let activeListItem = document.createElement("li");
+  activeListItem.className = "dashactivetasks-item"
+    activeListItem.setAttribute('data-id', task.id);
+    activeListItem.style.backgroundColor = `hsl(${task.colourCode}, 80%)`;
+
+  let activeListItemHead = document.createElement("h4");
+    activeListItemHead.textContent = task.taskTitle;
+    let activeListItemDueDate = document.createElement("p");
+    activeListItemDueDate.innerHTML = `<span style="font-weight:500">Due</span>: ${task.dueDate.substring(5)}`;
+    let activeListItemTimeElapsed = document.createElement("h7");
+    activeListItemTimeElapsed.textContent = `${Math.floor(task.timeElapsed / 3600)}:${Math.floor(task.timeElapsed / 60)} elapsed`;
+
+  let activeListItemDelBtn = document.createElement("button");
+  activeListItemDelBtn.textContent = "✕";
+
+  // Add event listener
+  activeListItemDelBtn.addEventListener("click", function(event){
+    event.preventDefault();
+    activeListItem.remove();
+    task.active = false;
+    searchAndReplace(kanbanEntries, task, "active");
+  });
+
+  activeListItem.appendChild(activeListItemHead);
+  activeListItem.appendChild(activeListItemDelBtn);
+  activeListItem.appendChild(activeListItemDueDate);
+  activeListItem.appendChild(activeListItemTimeElapsed);
+  dashActiveTasksList.appendChild(activeListItem);
+}
+
 // Remove deleted task from array + local storage, and do the same for corresponding checklist 
 function removeItem(task, index) {
   if (index > -1){
     kanbanEntries.splice(index, 1);
   }
   rm(task.id);
+  archiveItem(task);
+}
+
+// Add deleted task to archived list 
+function archiveItem(task) {
+  // DOM
+  let archiveListItem = document.createElement("li");
+  archiveListItem.className = "dashdeldtasks-item"
+  archiveListItem.style.backgroundColor = `hsl(${task.colourCode}, 80%)`;
+
+  let archiveListItemHead = document.createElement("h4");
+    archiveListItemHead.textContent = task.taskTitle;
+    let archiveListItemDueDate = document.createElement("p");
+    archiveListItemDueDate.innerHTML = `<span style="font-weight:500">Due</span>: ${task.dueDate.substring(5)}`;
+
+  let archiveListItemRestoreBtn = document.createElement("button");
+  archiveListItemRestoreBtn.textContent = "Restore";
+    archiveListItemRestoreBtn.style.backgroundColor = `hsl(${task.colourCode}, 65%)`;
+
+  // Add event listener
+  archiveListItemRestoreBtn.addEventListener("click", function(event){
+    event.preventDefault();
+    archiveListItem.remove();
+    renderTask(task);
+  });
+
+  archiveListItem.appendChild(archiveListItemHead);
+  archiveListItem.appendChild(archiveListItemDueDate);
+  archiveListItem.appendChild(archiveListItemRestoreBtn);
+  dashDeldTasksList.appendChild(archiveListItem);
 }
 
 
 /////////////////////////
-// Interact.js for kanban "entries"
-// - Resizable
-// - Draggable in bounds of board
-//   - Saves state in element, array and local storage
+// Handling interact.js code for interactables
+// - Code from demos (https://interactjs.io/)
 /////////////////////////
 
+
+
+// Interact for sticky notes, resizable and draggable
 // target elements with the "kanban-entry" class
 interact('.kanban-entry')
   .resizable({
@@ -422,7 +534,6 @@ interact('.kanban-entry')
         // Push new coords to array and push updated object to localStorage
         for (let i=0; i < kanbanEntries.length; i++) {
           if (kanbanEntries[i].id == event.target.getAttribute('data-id')) {
-
             kanbanEntries[i].translatePos = event.target.style.transform;
             kanbanEntries[i].interactX = event.target.getAttribute('data-x');
             kanbanEntries[i].interactY = event.target.getAttribute('data-y');
@@ -432,6 +543,32 @@ interact('.kanban-entry')
         };
       }
     }
+  })
+// Double tap changes colour
+interact('.kanban-entry-textcontainer')
+  .on('doubletap', function (event) {
+    console.log(localStorage)
+
+    event.preventDefault()
+    // Push new coords to array and push updated object to localStorage
+    for (let i=0; i < kanbanEntries.length; i++) {
+      if (kanbanEntries[i].id == event.target.parentNode.getAttribute('data-id')) {
+        kanbanEntries[i].colourCode = `${Math.random() * 360}, ${Math.random() * 100}%`,
+          event.target.parentNode.style.backgroundColor = `hsl(${kanbanEntries[i].colourCode}, 80%)`;
+          event.target.parentNode.querySelector('.kanban-entryheader').style.backgroundColor = `hsl(${kanbanEntries[i].colourCode}, 75%)`;
+        
+        let activetaskList = document.querySelectorAll(".dashactivetasks-item")
+        if(kanbanEntries[i].active == true) {
+          for (let i=0; i < activetaskList.length; i++) {
+            if (activetaskList[i].getAttribute('data-id') == event.target.parentNode.getAttribute('data-id')) {
+              activetaskList[i].style.backgroundColor = `hsl(${kanbanEntries[i].colourCode}, 80%)`;
+            }
+          }
+        }
+        set(event.target.parentNode.getAttribute('data-id'), kanbanEntries[i]);
+      };
+    };
+    console.log(localStorage)
   })
 
 function dragMoveListener (event) {
@@ -535,45 +672,47 @@ function addTask(taskTitle, taskType, dueDate, estimatedTimeHours, estimatedTime
 
 // Initialise Pomodoro Edit box
 function initPomEdit(task, pos) {
-    let pomListItem = document.createElement("li");
-    let pomListItemHead = document.createElement("h4");
-    let pomListItemMins = document.createElement("input");
-      pomListItemMins.setAttribute("type", "number");
-      pomListItemMins.setAttribute("min", "0");
-      pomListItemMins.setAttribute("max", "59");
-      pomListItemMins.className = "pomedititem-input"
-    let pomListItemMinsTxt = document.createElement("p");
-      pomListItemMinsTxt.textContent = "mins";
+  let pomListItem = document.createElement("li");
+  let pomListItemHead = document.createElement("h4");
+  let pomListItemMins = document.createElement("input");
+    pomListItemMins.setAttribute("type", "number");
+    pomListItemMins.setAttribute("min", "0");
+    pomListItemMins.setAttribute("max", "59");
+    pomListItemMins.className = "pomedititem-input"
+  let pomListItemMinsTxt = document.createElement("p");
+    pomListItemMinsTxt.textContent = "mins";
 
-      if((task.pomodoroSetup[pos]).type == "work") {
-        pomListItem.className = "pomedititem-work";
-        pomListItemHead.textContent = "Work";
-      } else {
-        pomListItem.className = "pomedititem-break";
-        pomListItemHead.textContent = "Break";
-      };
+    if((task.pomodoroSetup[pos]).type == "work") {
+      pomListItem.className = "pomedititem-work";
+      pomListItem.style.boxShadow = "inset 0px 3px 8px #00000029"
+      pomListItemHead.textContent = "Work";
+    } else {
+      pomListItem.className = "pomedititem-break";
+      pomListItemHead.style.fontStyle = "italic";
+      pomListItemHead.textContent = "Break";
+    };
 
-    // Add event listeners
-    pomListItemMins.addEventListener("input", function(event){
-      event.preventDefault();
-      (task.pomodoroSetup[pos]).time = parseInt(pomListItemMins.value);
-      //console.log(parseInt(pomListItemMins.value))
+  // Add event listeners
+  pomListItemMins.addEventListener("input", function(event){
+    event.preventDefault();
+    (task.pomodoroSetup[pos]).time = parseInt(pomListItemMins.value);
+    //console.log(parseInt(pomListItemMins.value))
 
-      for (let i=0; i < kanbanEntries.length; i++) {
-        if (kanbanEntries[i].id == task.id) {
-          kanbanEntries[i].pomodoroSetup = task.pomodoroSetup;
+    for (let i=0; i < kanbanEntries.length; i++) {
+      if (kanbanEntries[i].id == task.id) {
+        kanbanEntries[i].pomodoroSetup = task.pomodoroSetup;
           
-          set(task.id, kanbanEntries[i]);
-        };
+        set(task.id, kanbanEntries[i]);
       };
-      console.log((task.pomodoroSetup[pos]).time);
-    });
+    };
+    console.log((task.pomodoroSetup[pos]).time);
+  });
 
-    pomListItemMins.setAttribute("placeholder", (task.pomodoroSetup[pos]).time);
-    pomListItem.appendChild(pomListItemHead);
-    pomListItem.appendChild(pomListItemMins);
-    pomListItem.appendChild(pomListItemMinsTxt);
-    activeTaskPomEditList.appendChild(pomListItem);
+  pomListItemMins.setAttribute("placeholder", (task.pomodoroSetup[pos]).time);
+  pomListItem.appendChild(pomListItemHead);
+  pomListItem.appendChild(pomListItemMins);
+  pomListItem.appendChild(pomListItemMinsTxt);
+  activeTaskPomEditList.appendChild(pomListItem);
 };
 
 // Initialise activetask section
@@ -623,7 +762,16 @@ function activetaskInit(task, isTypeReading){
     addList(task, isTypeReading);
   });
 
-  pomodoroInit(task);
+  for (let i=0; i < (task.pomodoroSetup).length; i++){
+    //console.log((task.pomodoroSetup).length);
+    initPomEdit(task, i);
+  }
+
+  // Begin pomodoro with first timeslot
+  let activePomSlot = 0;
+  pomodoroInit(task, activePomSlot);
+  // Then the other timers
+  otherTimersInit(task);
 };
 
 function addList(task, isTypeReading) {
@@ -641,18 +789,20 @@ function addList(task, isTypeReading) {
 };
 
 // Initialise Pomodoro timer
-function pomodoroInit(task) {
-  pomTimer = new Timer({precision: 'seconds', countdown: true, startValues: {minutes: 25}});
-  stopWatch = new Timer({precision: 'seconds', startValues: {minutes: task.timeElapsed}});  
-  timerToComplete = new Timer({precision: 'minutes', countdown: true, startValues: {hours:task.estimatedTimeHours, minutes: task.estimatedTimeMins}});  
+function pomodoroInit(task, activePomSlot) {
+  let pomSlots = document.querySelectorAll("#activetaskmainpomedit-entrypoint > .pomedititem-work, .pomedititem-break");
+
+  // Initialise timer func, update textContent
+  pomTimer = new Timer({precision: 'seconds', countdown: true, startValues: {minutes: (task.pomodoroSetup[activePomSlot]).time}});
+    let pomTimerValues = document.querySelector('#maintimer > .values');
+    pomTimerValues.textContent = `${pomTimer.getTimeValues()}`;
+    pomSlots[activePomSlot].style.backgroundColor = "#dbdbdb";
   
   // DOM
   // Pomodoro
   pomodoroStartBtn.addEventListener('click', function(e) {
     // Pomodoro
     pomTimer.start();
-    stopWatch.start();
-    document.querySelector('#activetasktimer-readout > .values').textContent = `${timerToComplete.getTimeValues()}`;
   });
   pomodoroPauseBtn.addEventListener('click', function(e) {
     // Pomodoro
@@ -673,7 +823,7 @@ function pomodoroInit(task) {
   });
   pomTimer.addEventListener('secondsUpdated', function (e) {
     // Pomodoro
-    document.querySelector('#maintimer > .values').textContent = `${pomTimer.getTimeValues()}`;
+    pomTimerValues.textContent = `${pomTimer.getTimeValues()}`;
   });
   pomTimer.addEventListener('started', function (e) {
       // Stopwatch
@@ -681,31 +831,43 @@ function pomodoroInit(task) {
         // Time to complete
         timerToComplete.start();
 
-        if (timerToComplete.getTimeValues().days > 0) {
-          console.log(timerToComplete.getTimeValues().days);
-          document.querySelector('#activetasktimer-readout-days').textContent = `${timerToComplete.getTimeValues().days} days`;
-        } 
+
   });
   pomTimer.addEventListener('reset', function (e) {
     // Pomodoro
-    document.querySelector('#maintimer > .values').textContent = `${pomTimer.getTimeValues()}`;
+    pomTimerValues.textContent = `${pomTimer.getTimeValues()}`;
   });
   pomTimer.addEventListener('targetAchieved', function (e) {
-    
+    // Cycle through to next slot
+    pomSlots[activePomSlot].style.backgroundColor = "#ffffff";
+    activePomSlot++;
+    pomodoroInit(task,activePomSlot)
+    //pomTimer = new Timer({precision: 'seconds', countdown: true, startValues: {minutes: (task.pomodoroSetup[activePomSlot]).time}});
+    pomTimerValues.textContent = `${pomTimer.getTimeValues()}`;
+    pomSlots[activePomSlot].style.backgroundColor = "#dbdbdb";
   });
-  
-
-  otherTimersInit(task);
 }
 
 // Initialise other timers
 function otherTimersInit(task) {
-  // DOM
+  // Initalise timer funcs, update textContent
+  stopWatch = new Timer({precision: 'seconds', startValues: {minutes: task.timeElapsed}});  
+  let stopWatchValues = document.querySelector('#activetaskstopwatch-readout > .values');
+    document.querySelector('#activetaskstopwatch-readout > .values').textContent = `${stopWatch.getTimeValues()}`;
+  timerToComplete = new Timer({precision: 'minutes', countdown: true, startValues: {hours:task.estimatedTimeHours, minutes: task.estimatedTimeMins}});  
+    let timerToCompleteValues = document.querySelector('#activetasktimer-readout > .values');
+    timerToCompleteValues.textContent = `${timerToComplete.getTimeValues()}`;
+    // If our time to complete amounts to days, add 'x' days above the readout
+    if (timerToComplete.getTimeValues().days > 0) {
+      console.log(timerToComplete.getTimeValues().days);
+      document.querySelector('#activetasktimer-readout-days').textContent = `${timerToComplete.getTimeValues().days} days`;
+    } 
 
+  // DOM
   // Stopwatch
   stopWatch.addEventListener('secondsUpdated', function (e) {
     // Stopwatch
-    document.querySelector('#activetaskstopwatch-readout > .values').textContent = `${stopWatch.getTimeValues()}`;
+    stopWatchValues.textContent = `${stopWatch.getTimeValues()}`;
     task.timeElapsed++;
       // Push new elapsed time to array and push updated object to localStorage
       searchAndReplace(kanbanEntries, task, "timeElapsed");
@@ -722,7 +884,7 @@ function otherTimersInit(task) {
       // Pomodoro
       stopWatch.reset();
       stopWatch.pause();
-      document.querySelector('#activetaskstopwatch-readout > .values').textContent = `${stopWatch.getTimeValues()}`;
+      stopWatchValues.textContent = `${stopWatch.getTimeValues()}`;
       task.timeElapsed = 0;
         // Push new elapsed time to array and push updated object to localStorage
         searchAndReplace(kanbanEntries, task, "timeElapsed");
@@ -731,25 +893,42 @@ function otherTimersInit(task) {
 
   // Time to complete
   timerToComplete.addEventListener('minutesUpdated', function (e) {
-    // Time to complete timer
-    document.querySelector('#activetasktimer-readout > .values').textContent = `${timerToComplete.getTimeValues()}`;
-    task.estimatedTimeMins--;
+    // Update
+    timerToCompleteValues.textContent = `${timerToComplete.getTimeValues()}`;
+
+    // Check if our timer has run out
+    // First see if we're at 0 mins
+    if(task.estimatedTimeMins <= 0) {
+      // If we're not at 0 hours
+      if(task.estimatedTimeHours > 0) {
+        // Subtract an hour and get mins to 59
+        task.estimatedTimeHours--;
+        task.estimatedTimeMins = 59;
+        // Push new elapsed time to array and push updated object to localStorage
+        searchAndReplace(kanbanEntries, task, "estimatedTimeHours");
+        searchAndReplace(kanbanEntries, task, "estimatedTimeMins");
+      }
+    // If we're not at 0 mins, subtract a min
+    } else {
+      task.estimatedTimeMins--;
       // Push new elapsed time to array and push updated object to localStorage
       searchAndReplace(kanbanEntries, task, "estimatedTimeMins");
+    };
   });
+
     timerAdd10MinsBtn.addEventListener('click', function(e) {
       task.estimatedTimeMins += 10;
       // Push new elapsed time to array and push updated object to localStorage
       searchAndReplace(kanbanEntries, task, "estimatedTimeMins");
       timerToComplete = new Timer({precision: 'minutes', countdown: true, startValues: {hours:task.estimatedTimeHours, minutes: task.estimatedTimeMins}});  
-      document.querySelector('#activetasktimer-readout > .values').textContent = `${timerToComplete.getTimeValues()}`;
+      timerToCompleteValues.textContent = `${timerToComplete.getTimeValues()}`;
     });
     timerAdd1HrBtn.addEventListener('click', function(e) {
       task.estimatedTimeHours++;
       // Push new elapsed time to array and push updated object to localStorage
       searchAndReplace(kanbanEntries, task, "estimatedTimeMins");
       timerToComplete.start({precision: 'minutes', countdown: true, startValues: {hours:task.estimatedTimeHours, minutes: task.estimatedTimeMins}});  
-      document.querySelector('#activetasktimer-readout > .values').textContent = `${timerToComplete.getTimeValues()}`;
+      timerToCompleteValues.textContent = `${timerToComplete.getTimeValues()}`;
     });
 };
 

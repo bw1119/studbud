@@ -34,7 +34,7 @@
             color: #ffffff;
         }
         .kanban-column-addbtn:hover {
-            color: #707070;
+            color: #707070BF;
         }
 
 #taskadd-button {
@@ -45,6 +45,33 @@
     color: #ffffff;
     border: none;
     font-size: 22px;
+}
+
+.dashactivetasks-item > button {
+    background-color: transparent;
+    position: relative;
+    width: fit-content;
+    height: 23px;
+    float: right;
+    top: -25px;
+    border-radius: 50px;
+    color: #707070BF;
+    border: none;
+    font-size: 0.9rem;
+}
+    .dashactivetasks-item > button:hover {
+        background-color: #92929240;
+    }
+.dashdeldtasks-item > button {
+    background-color: #929292;
+    width: fit-content;
+    height: 20px;
+    border-radius: 15px;
+    color: #ffffff;
+    border: none;
+    font-size: 0.8rem;
+    padding: 0px 10px 0px 10px;
+    margin: 6px 0px 4px 20px;
 }
 
 #timerbuttons-container > button {

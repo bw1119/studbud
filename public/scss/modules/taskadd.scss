@@ -6,6 +6,7 @@
     display: none;
     flex-direction: column;
     position: absolute;
+    align-self: flex-start;
     z-index: 999;
 }
     // Labels have a bit of space, and are sized up + bolder

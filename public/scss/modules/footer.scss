@@ -2,5 +2,15 @@
 footer {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+}
+footer > p {
+    height: min-content;
+    margin: 0;
+    font-weight: 500;
+}
+footer > a {
+    font-weight: 500;
+    color: #707070;
 }

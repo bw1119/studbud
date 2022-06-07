@@ -48,8 +48,14 @@
         <div class="dashboard-containertop" id="dashdeldtasks-containertop"></div>
         <div class="dashboard-container-head">
           <h4 class="dash-h4">Archived tasks</h4>
-          <button id="dashdeldtasks-revealbutton" class="dropdownbutton"> ◂ </button>
+          <button id="dashdeldtasks-revealbutton" class="dropdownbutton"> ▾ </button>
         </div> 
+
+        <div id="dashdeldtasks">
+          <ul id="dashdeldtasks-list">
+          </ul>
+        </div>
+
         <p class="dash-subtitle"><em>Recently deleted tasks</em></p>
       </div>
 
@@ -58,12 +64,10 @@
 
     <!-- Fixed header - logo on left, account button on right -->
     <header> 
-
       <img src="assets/brand/logo.png">
 
       <!-- Profile button - currently non-functional -->
       <a href="#" id="avatar-button" ><i class="fa-solid fa-circle-user"></i></a>
-
     </header>
 
     <main>
@@ -71,14 +75,12 @@
       <!-- Begin kanban container -->
       <div id="kanban-container">
 
-        <!-- Short tutorial for notes, disappears after interaction -->
-        <h2 class="instructions"><em>Move a note by dragging the box, resize at corners, click 'Activate' to make active</em></h2>
-
         <!-- Kanban head - with add task button -->
         <div id="kanban-head">
+
           <!-- Add task button -->
           <button id="taskadd-button" type="button">Add task</button>
-          <!-- Begin task add menu, pops up on button press -->
+          <!-- Task add menu, pops up on button press -->
             <form id="taskadd-form">
               <!-- Task title -->
               <label for="task">Task name</label>
@@ -118,6 +120,8 @@
                 <button id="taskadd-form-cancel" type="button">Cancel</button>
               </div>
             </form>
+          <!-- Short tutorial for notes, only shows if this is the users' first time -->
+          <h2 class="instructions"><em>Move a note by dragging the box, resize at corners, double-tap to change colour, click 'Activate' to make active</em></h2>
 
         <!-- End kanban head -->
         </div>
@@ -143,17 +147,17 @@
             <div class="activetaskpanel-topsmall"></div>
             <h2 class="activetaskpanel-h2"> Time elapsed </h2>
 
+            <!-- Time elapsed readout -->
             <div id="activetaskstopwatch-readout" class="activetaskpanel-lvl2">
               <div class="values">00:00:00</div>
             </div>
-
-            <div id="activetaskstopwatch-buttoncontainer">
-              <button class="startButton">Start</button>
-              <button class="pauseButton" >Pause</button>
-              <!-- <button class="stopButton">Stop</button> -->
-              <button class="resetButton">Reset</button>
-            </div>
-
+            <!-- Hold the timer buttons -->
+              <div id="activetaskstopwatch-buttoncontainer">
+                <button class="startButton">Start</button>
+                <button class="pauseButton" >Pause</button>
+                <!-- <button class="stopButton">Stop</button> -->
+                <button class="resetButton">Reset</button>
+              </div>
           </div>
           
           <!-- Time to completion panel -->
@@ -163,35 +167,40 @@
             <p class="readout-disclaimer"> Updates every minute </p>
 
             <h3 id="activetasktimer-readout-days"></h3>
+            <!-- Time to completion readout -->
             <div id="activetasktimer-readout" class="activetaskpanel-lvl2">
               <div class="values">00:00:00</div>
             </div>
+            <!-- Hold the timer buttons -->
               <div id="activetasktimer-buttoncontainer">
                 <button id="activetasktimerreadout-buttonadd1h">Add 1h</button>
                 <button id="activetasktimerreadout-buttonadd10m">Add 10m</button>
               </div>
 
+            <!-- Due date -->
             <div id="activetasktimer-due" class="activetaskpanel-lvl2">
               <p><span style="font-weight:500">Due</span> date</p>
             </div>
-
           </div>
         </div>
 
         <!-- Main -->
         <div id="activetask-main" class="activetaskpanel-lvl1">
+          <!-- Top -->
           <div class="activetaskpanel-topbig">          
             <button id="activetaskmain-editbutton" class="editbutton"><i class="fa-solid fa-pen-to-square"></i></button>
             <h4> Type </h4>
           </div>
+
           <h1 class="activetaskmain-h1"> Task </h1>
           <p id="activetaskmainh1-priority"> Priority </h1>
 
+          <!-- Pomodoro container -->
           <div id="activetaskmain-pomodoro" class="activetaskpanel-lvl2">
             <h2 class="activetaskmain-h2"> Pomodoro timer </h2>
 
             <div id="maintimer">
-              <div class="values">00:25:00</div>
+              <div class="values">00:00:00</div>
 
               <div id="timerbuttons-container">
                 <button class="startButton">Start</button>
@@ -199,18 +208,19 @@
                 <!-- <button class="stopButton">Stop</button> -->
                 <button class="resetButton">Reset</button>
               </div>
-
             </div>
-
           </div>
 
+          <!-- Checklist container -->
           <div id="activetaskmain-checklist-container" class="activetaskpanel-lvl1a">
             <h2 class="activetaskmain-h2"> Task list </h2>
             <div id="activetaskmain-checklist" class="activetaskpanel-lvl3">
-              <ul id="activetaskmain-entrypoint" role="listbox" aria-label="email list">
 
+              <!-- List entrypoint -->
+              <ul id="activetaskmain-entrypoint" role="listbox" aria-label="email list">
               </ul>
 
+              <!-- Holds add entry button -->
               <div id="activetaskmain-checklistemptyspace"></div>
 
             </div>        
@@ -234,13 +244,15 @@
           <!-- Pomodoro editor panel -->
           <div id="activetaskmain-pomedit">
             <h3 class="activetaskpanel-h3"> Pomodoro </h3>
+            <!-- Pomodoro timeslots editor -->
             <div class="activetaskpanel-lvl2"  id="activetaskmain-pomeditlist">
+              <!-- Timeslots entrypoint -->
               <ul id="activetaskmainpomedit-entrypoint" role="listbox" aria-label="email list">
                 
               </ul>
+
             </div>
           </div>
-
         </div>
 
       <!-- End active task container -->
@@ -248,10 +260,13 @@
 
     </main>
 
-
+    <!-- Footer -->
     <footer>
-      <p>Tester</p>
+      <p>Copyright Studbud 2022</p>
+      <p>(04)-9999-9999</p>
+      <a href="mailto:enquiries@studbud.com">enquiries@studbud.com</a>
     </footer>
+
   <!-- End grid container -->
   </div>
 

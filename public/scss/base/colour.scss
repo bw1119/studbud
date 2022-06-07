@@ -27,6 +27,51 @@ header {
         border: 1px solid #999999;
         border-radius: 5px;
     }
+    #dashdeldtasks {
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    border-radius: 5px;
+    }
+        .dashdeldtasks-item {
+            -moz-box-shadow:    inset 0px 3px 8px #00000029;
+            -webkit-box-shadow: inset 0px 3px 8px #00000029;
+            box-shadow:         inset 0px 3px 8px #00000029;
+        }
+        .dashdeldtasks-item > h4 {
+            padding-bottom: 5px;
+            font-size: 1.4rem;
+            text-decoration: underline 2px;
+            padding-bottom: 1px;
+        }
+        .dashdeldtasks-item > p {
+            font-size: 0.8rem;
+            border-bottom: 1px solid #70707040;
+        }
+    #dashactivetasks {
+    background-color: #ffffff;
+    border: 1px solid #999999;
+    border-radius: 5px;
+    }
+        .dashactivetasks-item {
+            -moz-box-shadow:    inset 0px 3px 8px #00000029;
+            -webkit-box-shadow: inset 0px 3px 8px #00000029;
+            box-shadow:         inset 0px 3px 8px #00000029;
+        }
+        .dashactivetasks-item > h4 {
+            padding-bottom: 5px;
+            font-size: 1.4rem;
+            text-decoration: underline 2px;
+            padding-bottom: 1px;
+        }
+        .dashactivetasks-item > h7 {
+            padding-bottom: 5px;
+            font-size: 0.75rem;
+            font-style:italic;
+        }
+        .dashactivetasks-item > p {
+            font-size: 0.8rem;
+            border-bottom: 1px solid #70707040;
+        }
 
 #taskadd-form {
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
@@ -36,11 +81,16 @@ header {
     box-shadow: 1px 1px 3px #0000001A;
 }
 
-main {
+html {
     background-image: linear-gradient(#E1BFA2 0% 40%, #F5F2EB 60%);
+    height: auto;
+}
+
+main {
+    //background-image: linear-gradient(#E1BFA2 0% 40%, #F5F2EB 60%);
 }
 #container {
-    background-image: linear-gradient(#E1BFA2 0% 40%, #F5F2EB 60%);
+    //background-image: linear-gradient(#E1BFA2 0% 40%, #F5F2EB 60%);
 }
 
 #taskadd-form {
