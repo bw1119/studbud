@@ -21,15 +21,29 @@
   "homepage": "https://github.com/bw1119/studbud#readme",
   "dependencies": {
     "easytimer.js": "^4.5.3",
-    "express": "^4.18.1",
+    "express": "^4.17.3",
+    "howler": "^2.2.3",
     "interactjs": "^1.10.11",
     "lockr": "^0.9.0-beta.0",
-    "sass": "^1.52.2"
+    "sass": "^1.50.0"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.6.0",
+    "@parcel/transformer-sass": "^2.4.1",
+    "assert": "^2.0.0",
     "autoprefixer": "^10.4.4",
-    "parcel": "^2.6.0",
-    "postcss": "^8.4.12"
+    "browserify-zlib": "^0.2.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "events": "^3.3.0",
+    "parcel": "^2.0.0-rc.0",
+    "path-browserify": "^1.0.1",
+    "postcss": "^8.4.12",
+    "process": "^0.11.10",
+    "querystring-es3": "^0.2.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "string_decoder": "^1.3.0",
+    "url": "^0.11.0",
+    "util": "^0.12.4"
   }
 }
