@@ -251,11 +251,13 @@
     #activetaskmain-pomedit { 
         background-color: #ffffff;
 
-        width: 150px;
+        width: 160px;
         margin-top: 10px;
+        padding-top: 5px;
     }
-    #activetaskmain-pomedit > h3 { 
+    #activetaskmainpomedit-head > h3 { 
         margin: 5px;
+        display: inline;
     }
         #activetaskmain-pomeditlist {
             overflow-y: scroll;
@@ -263,6 +265,9 @@
             border-radius: 0px 5px 5px 0px;
             margin: 15px 15px 15px 0px;
         }
+            #activetaskmainpomedit-revealbutton{
+                margin: 10px 5px 0px 0px;
+            }
         #activetaskmainpomedit-entrypoint {
             text-align: left;
             list-style: none;

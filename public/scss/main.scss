@@ -4,7 +4,6 @@
 @import "base/buttons.scss";
 @import "base/colour.scss";
 @import "base/typography.scss";
-@import "base/queries.scss";
 
 // Layout 
 @import "layout/grid.scss";
@@ -15,4 +14,5 @@
     @import "modules/taskadd.scss";
     @import "modules/dashboard.scss";
 
-// Vendor/third-party 
+// Media queries
+@import "base/queries.scss";

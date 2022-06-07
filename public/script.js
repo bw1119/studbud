@@ -16,91 +16,64 @@
 // DOM variable setups
   // Dashboard
   // Archived tasks
-  var dashDeldTasksList = document.querySelector("#dashdeldtasks-list");
-  var dashDeldTasksBtn = document.querySelector("#dashdeldtasks-revealbutton")
-    // Button that hides/reveals deldtaskslist container
-    let dashDeldTasksBtnTest = true;
-    dashDeldTasksBtn.addEventListener("click", function() {
-      if(dashDeldTasksBtnTest == true) {
-        document.querySelector("#dashdeldtasks").style.display = "none"
-        dashDeldTasksBtnTest = false;
-        dashDeldTasksBtn.textContent = "◂"
-      } else {
-        document.querySelector("#dashdeldtasks").style.display = "block"
-        dashDeldTasksBtnTest = true;
-        dashDeldTasksBtn.textContent = "▾"
-      }
-    });
+  const dashDeldTasksList = document.querySelector("#dashdeldtasks-list");
+
   // Active tasks
-  var dashActiveTasksList = document.querySelector("#dashactivetasks-list");
-  var dashActiveTasksBtn = document.querySelector("#dashactivetasks-revealbutton")
-    // Button that hides/reveals activetaskslist container
-    let dashActiveTasksBtnTest = true;
-    dashActiveTasksBtn.addEventListener("click", function() {
-      if(dashActiveTasksBtnTest == true) {
-        document.querySelector("#dashactivetasks").style.display = "none"
-        dashActiveTasksBtnTest = false;
-        dashActiveTasksBtn.textContent = "◂"
-      } else {
-        document.querySelector("#dashactivetasks").style.display = "block"
-        dashActiveTasksBtnTest = true;
-        dashActiveTasksBtn.textContent = "▾"
-      }
-    });
+  const dashActiveTasksList = document.querySelector("#dashactivetasks-list");
 
   // Taskadd form DOM
   const form = document.getElementById("taskadd-form");
-  var taskAddBtn = document.getElementById("taskadd-button");
-  var taskAddForm = document.getElementById("taskadd-form");
-    var taskAddCnclBtn = document.getElementById("taskadd-form-cancel");
+  const taskAddBtn = document.getElementById("taskadd-button");
+  const taskAddForm = document.getElementById("taskadd-form");
+    const taskAddCnclBtn = document.getElementById("taskadd-form-cancel");
     // Taskadd data inputs
-    var taskInput = document.getElementById("taskInput");
-    var tasktypeInput = document.getElementById("tasktypeInput");
-    var dueDateInput = document.getElementById("dueDateInput");
+    const taskInput = document.getElementById("taskInput");
+    const tasktypeInput = document.getElementById("tasktypeInput");
+    const dueDateInput = document.getElementById("dueDateInput");
       // Make date input not accept past dates
       dueDateInput.setAttribute('min', `${new Date().toISOString().substring(0,10)}`);
-    var estimatedTimeInputMins = document.getElementById("estimatedTimeInput-Mins");
-    var estimatedTimeInputHours = document.getElementById("estimatedTimeInput-Hours");
-    var priorityInput = document.getElementById("priorityInput");
+    const estimatedTimeInputMins = document.getElementById("estimatedTimeInput-Mins");
+    const estimatedTimeInputHours = document.getElementById("estimatedTimeInput-Hours");
+    const priorityInput = document.getElementById("priorityInput");
 
   // Kanban DOM
   const board = document.getElementById("kanban-board");
-    var instructionsTxt = document.querySelector(".instructions");
+  const instructionsTxt = document.querySelector(".instructions");
 
   // Active task DOM
   // Panel head decorations
-  var activeTaskTopBig = document.querySelectorAll('.activetaskpanel-topbig');
-  var activeTaskTopSmall = document.querySelectorAll('.activetaskpanel-topsmall');
+  const activeTaskTopBig = document.querySelectorAll('.activetaskpanel-topbig');
+  const activeTaskTopSmall = document.querySelectorAll('.activetaskpanel-topsmall');
 
   // Main panel
-  var activeTaskMainTitle = document.querySelector(".activetaskmain-h1");
-  var activeTaskMainTopType = document.querySelector(".activetaskpanel-topbig > h4");
-  var activeTaskMainTitleSub = document.querySelector("#activetaskmainh1-priority");
-  var activeTaskMainListContainer = document.querySelector("#activetaskmain-checklist");
-    var activeTaskMainListEmptySpace = document.querySelector("#activetaskmain-checklistemptyspace");
-  var activeTaskMainList = document.querySelector("#activetaskmain-entrypoint");
+  const activeTaskMainTitle = document.querySelector(".activetaskmain-h1");
+  const activeTaskMainTopType = document.querySelector(".activetaskpanel-topbig > h4");
+  const activeTaskMainTitleSub = document.querySelector("#activetaskmainh1-priority");
+  const activeTaskMainListContainer = document.querySelector("#activetaskmain-checklist");
+    const activeTaskMainListEmptySpace = document.querySelector("#activetaskmain-checklistemptyspace");
+  const activeTaskMainList = document.querySelector("#activetaskmain-entrypoint");
     // List
-    var listItemOpenAllButton = document.querySelector("#activetaskmain-openallbutton");
+    const listItemOpenAllButton = document.querySelector("#activetaskmain-openallbutton");
 
   // Pomodoro timer
-  var pomodoroStartBtn = document.querySelector('#timerbuttons-container > .startButton');
-  var pomodoroPauseBtn = document.querySelector('#timerbuttons-container > .pauseButton');
-  var pomodoroResetBtn = document.querySelector('#timerbuttons-container > .resetButton');
+  const pomodoroStartBtn = document.querySelector('#timerbuttons-container > .startButton');
+  const pomodoroPauseBtn = document.querySelector('#timerbuttons-container > .pauseButton');
+  const pomodoroResetBtn = document.querySelector('#timerbuttons-container > .resetButton');
 
   // Time elapsed panel
-  var stopwatchStartBtn = document.querySelector('#activetaskstopwatch-buttoncontainer > .startButton');
-  var stopwatchPauseBtn = document.querySelector('#activetaskstopwatch-buttoncontainer > .pauseButton');
-  var stopwatchResetBtn = document.querySelector('#activetaskstopwatch-buttoncontainer > .resetButton');
+  const stopwatchStartBtn = document.querySelector('#activetaskstopwatch-buttoncontainer > .startButton');
+  const stopwatchPauseBtn = document.querySelector('#activetaskstopwatch-buttoncontainer > .pauseButton');
+  const stopwatchResetBtn = document.querySelector('#activetaskstopwatch-buttoncontainer > .resetButton');
 
   // Time to complete panel
-  var activeTaskTimerDueDate = document.querySelector("#activetasktimer-due > p");
-    var timerAdd1HrBtn = document.querySelector('#activetasktimerreadout-buttonadd1h');
-    var timerAdd10MinsBtn = document.querySelector('#activetasktimerreadout-buttonadd10m');
+  const activeTaskTimerDueDate = document.querySelector("#activetasktimer-due > p");
+    const timerAdd1HrBtn = document.querySelector('#activetasktimerreadout-buttonadd1h');
+    const timerAdd10MinsBtn = document.querySelector('#activetasktimerreadout-buttonadd10m');
 
   // Pomodoro edit panel
-  var activeTaskPomEditList = document.querySelector("#activetaskmainpomedit-entrypoint");
-
-// Kanban data
+  const activeTaskPomEditList = document.querySelector("#activetaskmainpomedit-entrypoint");
+    
+  // Kanban data
   var kanbanBoard = [];
   var kanbanEntries = [];
   var kanbanArchivedEntries = [];
@@ -143,14 +116,6 @@ document.addEventListener("DOMContentLoaded", function() {
         kanbanEntries.push(get(localStorage.key(i)));
       }; 
     };
-
-    // Deprecated
-      // Push kanbanLists from locStorage to global array, if has list prefix
-      //for (let i=0; i < localStorage.length; i++) {
-      //  if ((localStorage.key(i)).substring(0,4) == "list") {
-      //    kanbanLists.push(get(localStorage.key(i)));
-      //  };
-      //};
     console.log(kanbanEntries)
 
   // If local storage is empty
@@ -160,19 +125,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Set default board state in local storage
     set('kanban_board', ['To-do', 'In-progress', 'Done', 'Future']);
-    /*
-    // Set default pomodoro state in local storage
-    set('pomodoro_setup', [
-      {type:'work', time:25},
-      {type:'break', time:5},
-      {type:'work', time:25},
-      {type:'break', time:5},
-      {type:'work', time:25},
-      {type:'break', time:5},
-      {type:'work', time:25},
-      {type:'break', time:30}
-    ]);
-    */
 
     // Push local storage to array
     kanbanBoard = get('kanban_board');
@@ -180,6 +132,74 @@ document.addEventListener("DOMContentLoaded", function() {
   
   // Now, initialise board
   kanbanInit();
+
+  // Create some hide/reveal dropdown buttons
+  // Pomodoro edit panel
+  let activeTaskPomEditBtnTest = true;
+  const activeTaskPomEditBtn = document.querySelector("#activetaskmainpomedit-revealbutton")
+  const activeTaskMainPomEdit = document.querySelector("#activetaskmain-pomeditlist")
+    activeTaskPomEditBtn.addEventListener("click", function() {
+    if(activeTaskPomEditBtnTest == true) {
+      activeTaskMainPomEdit.style.height = "15px"
+      activeTaskMainPomEdit.style.overflowY = "hidden"
+      activeTaskPomEditBtnTest = false;
+      activeTaskPomEditBtn.textContent = "◂"
+    } else {
+      activeTaskMainPomEdit.style.height = "200px"
+      activeTaskMainPomEdit.style.overflowY = "scroll"
+      activeTaskPomEditBtnTest = true;
+      activeTaskPomEditBtn.textContent = "▾"
+    }
+  });
+  // Dashboard active tasks
+  let dashActiveTasksBtnTest = true;
+  const dashActiveTasksBtn = document.querySelector("#dashactivetasks-revealbutton");
+  const dashActiveTasks = document.querySelector("#dashactivetasks")
+    dashActiveTasksBtn.addEventListener("click", function() {
+      if(dashActiveTasksBtnTest == true) {
+        dashActiveTasks.style.height = "15px"
+        dashActiveTasks.style.overflowY = "hidden"
+        dashActiveTasksBtnTest = false;
+        dashActiveTasksBtn.textContent = "◂"
+      } else {
+        dashActiveTasks.style.height = "250px"
+        dashActiveTasks.style.overflowY = "scroll"
+        dashActiveTasksBtnTest = true;
+        dashActiveTasksBtn.textContent = "▾"
+      }
+    });
+  // Dashboard archived tasks
+  let dashDeldTasksBtnTest = true;
+  const dashDeldTasksBtn = document.querySelector("#dashdeldtasks-revealbutton")
+  const dashDeldTasks= document.querySelector("#dashdeldtasks")
+    dashDeldTasksBtn.addEventListener("click", function() {
+      if(dashDeldTasksBtnTest == true) {
+        dashDeldTasks.style.height = "15px"
+        dashDeldTasks.style.overflowY = "hidden"        
+        dashDeldTasksBtnTest = false;
+        dashDeldTasksBtn.textContent = "◂"
+      } else {
+        dashDeldTasks.style.height = "150px"
+        dashDeldTasks.style.overflowY = "scroll"        
+        dashDeldTasksBtnTest = true;
+        dashDeldTasksBtn.textContent = "▾"
+      }
+    });
+  // Header contextmenu
+  let headerBtnTest = false;
+  const headerBtn = document.querySelector("#header-contextmenu")
+  const dashBoard = document.querySelector("#dashboard")
+  headerBtn.addEventListener("click", function() {
+    if(headerBtnTest == true) {
+      dashBoard.style.display = "none"       
+      headerBtnTest = false;
+      //dashDeldTasksBtn.textContent = "◂"
+    } else {
+      dashBoard.style.display = "block"
+      headerBtnTest = true;
+      //dashDeldTasksBtn.textContent = "▾"
+    }
+  });
 });
 
 
@@ -221,11 +241,11 @@ function kanbanInit(){
 function kanbanRenderColumn(i, testIfNew){
   // Create HTML elements
   // Column div
-  let column = document.createElement('div');
+  const column = document.createElement('div');
   column.setAttribute('class','kanban-column'); 
 
   // Title taken from array
-  let columnTitle = document.createElement("h1");
+  const columnTitle = document.createElement("h1");
   columnTitle.setAttribute("contenteditable", "true");
 
   // Test if this is a new column...
@@ -246,8 +266,8 @@ function kanbanRenderColumn(i, testIfNew){
   console.log('  ' + kanbanBoard[i]);
 
   // Add button and container
-  let columnDiv = document.createElement("div");
-  let columnAddBtn = document.createElement("button");
+  const columnDiv = document.createElement("div");
+  const columnAddBtn = document.createElement("button");
   columnAddBtn.className="kanban-column-addbtn";
   columnAddBtn.textContent="+";
 
@@ -261,7 +281,7 @@ function kanbanRenderColumn(i, testIfNew){
     });
 
   // Delete button
-  let columnDelBtn = document.createElement("button");
+  const columnDelBtn = document.createElement("button");
   columnDelBtn.className="kanban-column-delbtn";
   columnDelBtn.textContent="✕";
     
@@ -288,7 +308,7 @@ function kanbanRenderColumn(i, testIfNew){
 function renderTask(task){
   // Create HTML elements
   // Base container div
-  let item = document.createElement("div");
+  const item = document.createElement("div");
     item.setAttribute('data-id', task.id);
     item.setAttribute('data-x', task.interactX);
     item.setAttribute('data-y', task.interactY);
@@ -300,36 +320,36 @@ function renderTask(task){
       item.style.backgroundColor = `hsl(${task.colourCode}, 80%)`;
 
   // Header div
-  let itemHead = document.createElement("div");
+  const itemHead = document.createElement("div");
   itemHead.setAttribute('style', `background-color: hsl(${task.colourCode}, 75%)`);
     itemHead.className = 'kanban-entryheader';
 
   // Text div
-  let itemTxtContainer = document.createElement("div");
+  const itemTxtContainer = document.createElement("div");
     itemTxtContainer.className = 'kanban-entry-textcontainer';
 
       // Title 
-      let title = document.createElement("h4");
+      const title = document.createElement("h4");
         title.className = 'kanban-entry-title';
         title.textContent = task.taskTitle; 
 
       // Due date
-      let duedate = document.createElement("p");
+      const duedate = document.createElement("p");
         duedate.className = 'kanban-entry-duedate';
         duedate.innerHTML = `<span style="font-weight:500">Due</span>: ${(task.dueDate).substring(5)}`;
 
       // Priority
-      let priority = document.createElement("p");
+      const priority = document.createElement("p");
         priority.className = 'kanban-entry-priority';
         priority.innerHTML = `<span style="font-weight:500">Priority</span>: ${task.priorityRating}`;
 
   // Extra Task DOM elements
-  let delButton = document.createElement("button");
-  let delButtonText = document.createTextNode("✕");
+  const delButton = document.createElement("button");
+  delButton.textContent = "✕";
     delButton.classname = 'kanban-entrybutton';
 
-  let activateButton = document.createElement("button");
-  let activateButtonText = document.createTextNode("Activate");
+  const activateButton = document.createElement("button");
+  activateButton.textContent = "activate";
     activateButton.classname = 'kanban-entrybutton';
   
   item.appendChild(itemHead);
@@ -338,36 +358,29 @@ function renderTask(task){
     itemTxtContainer.appendChild(duedate);
     itemTxtContainer.appendChild(priority);
 
-  delButton.appendChild(delButtonText);
   itemHead.appendChild(delButton);
-  activateButton.appendChild(activateButtonText);
   itemHead.appendChild(activateButton);
 
   // Event Listeners for DOM elements
   delButton.addEventListener("click", function(event){
     event.preventDefault();
-    let id = event.target.parentElement.getAttribute('data-id');
-    let index = kanbanEntries.findIndex(
+    const id = event.target.parentElement.getAttribute('data-id');
+    const index = kanbanEntries.findIndex(
       task => task.id === Number(id)
-      );
-    console.log(index)
-    console.log(task.items)
+    );
+
+    //console.log(isTaskInActiveList(id, true))
+    isTaskInActiveList(task.id, true);
+
     item.remove();
     removeItem(task, index);
   });
   activateButton.addEventListener("click", function(event){
+    console.log("test")
     activeTaskMainList.innerHTML="";
     activeTaskMainListEmptySpace.innerHTML="";
     task.active = true;
-    let currentActiveTasks = document.querySelectorAll("#dashactivetasks-list > .dashactivetasks-item");
-
-    let isTaskInActiveList = false;
-    for(i=0;i<currentActiveTasks.length;i++) {
-      if(currentActiveTasks[i].getAttribute('data-id') == task.id) {
-        isTaskInActiveList = true;
-      } 
-    }
-    if(isTaskInActiveList = false) {
+    if(isTaskInActiveList(task.id, false) == false) {
       addActiveItem(task);
     }
 
@@ -386,19 +399,19 @@ function renderTask(task){
 // Add active task to active list (unfinished)
 function addActiveItem(task) {
   // DOM
-  let activeListItem = document.createElement("li");
+  const activeListItem = document.createElement("li");
   activeListItem.className = "dashactivetasks-item"
     activeListItem.setAttribute('data-id', task.id);
     activeListItem.style.backgroundColor = `hsl(${task.colourCode}, 80%)`;
 
-  let activeListItemHead = document.createElement("h4");
+  const activeListItemHead = document.createElement("h4");
     activeListItemHead.textContent = task.taskTitle;
-    let activeListItemDueDate = document.createElement("p");
+    const activeListItemDueDate = document.createElement("p");
     activeListItemDueDate.innerHTML = `<span style="font-weight:500">Due</span>: ${task.dueDate.substring(5)}`;
-    let activeListItemTimeElapsed = document.createElement("h7");
+    const activeListItemTimeElapsed = document.createElement("h7");
     activeListItemTimeElapsed.textContent = `${Math.floor(task.timeElapsed / 3600)}:${Math.floor(task.timeElapsed / 60)} elapsed`;
 
-  let activeListItemDelBtn = document.createElement("button");
+  const activeListItemDelBtn = document.createElement("button");
   activeListItemDelBtn.textContent = "✕";
 
   // Add event listener
@@ -427,17 +440,18 @@ function removeItem(task, index) {
 
 // Add deleted task to archived list 
 function archiveItem(task) {
+  task.active = false;
   // DOM
-  let archiveListItem = document.createElement("li");
+  const archiveListItem = document.createElement("li");
   archiveListItem.className = "dashdeldtasks-item"
   archiveListItem.style.backgroundColor = `hsl(${task.colourCode}, 80%)`;
 
-  let archiveListItemHead = document.createElement("h4");
+  const archiveListItemHead = document.createElement("h4");
     archiveListItemHead.textContent = task.taskTitle;
-    let archiveListItemDueDate = document.createElement("p");
+    const archiveListItemDueDate = document.createElement("p");
     archiveListItemDueDate.innerHTML = `<span style="font-weight:500">Due</span>: ${task.dueDate.substring(5)}`;
 
-  let archiveListItemRestoreBtn = document.createElement("button");
+  const archiveListItemRestoreBtn = document.createElement("button");
   archiveListItemRestoreBtn.textContent = "Restore";
     archiveListItemRestoreBtn.style.backgroundColor = `hsl(${task.colourCode}, 65%)`;
 
@@ -557,7 +571,7 @@ interact('.kanban-entry-textcontainer')
           event.target.parentNode.style.backgroundColor = `hsl(${kanbanEntries[i].colourCode}, 80%)`;
           event.target.parentNode.querySelector('.kanban-entryheader').style.backgroundColor = `hsl(${kanbanEntries[i].colourCode}, 75%)`;
         
-        let activetaskList = document.querySelectorAll(".dashactivetasks-item")
+        const activetaskList = document.querySelectorAll(".dashactivetasks-item")
         if(kanbanEntries[i].active == true) {
           for (let i=0; i < activetaskList.length; i++) {
             if (activetaskList[i].getAttribute('data-id') == event.target.parentNode.getAttribute('data-id')) {
@@ -672,14 +686,14 @@ function addTask(taskTitle, taskType, dueDate, estimatedTimeHours, estimatedTime
 
 // Initialise Pomodoro Edit box
 function initPomEdit(task, pos) {
-  let pomListItem = document.createElement("li");
-  let pomListItemHead = document.createElement("h4");
-  let pomListItemMins = document.createElement("input");
+  const pomListItem = document.createElement("li");
+  const pomListItemHead = document.createElement("h4");
+  const pomListItemMins = document.createElement("input");
     pomListItemMins.setAttribute("type", "number");
     pomListItemMins.setAttribute("min", "0");
     pomListItemMins.setAttribute("max", "59");
     pomListItemMins.className = "pomedititem-input"
-  let pomListItemMinsTxt = document.createElement("p");
+  const pomListItemMinsTxt = document.createElement("p");
     pomListItemMinsTxt.textContent = "mins";
 
     if((task.pomodoroSetup[pos]).type == "work") {
@@ -718,12 +732,12 @@ function initPomEdit(task, pos) {
 // Initialise activetask section
 function activetaskInit(task, isTypeReading){
   //DOM
-  let mainEditButton = document.querySelector("#activetaskmain-editbutton");
-  let timerButtons = document.querySelectorAll("#timerbuttons-container > button, #activetasktimer-buttoncontainer > button,#activetaskstopwatch-buttoncontainer > button");
-  let backgroundsLvl1 = document.querySelectorAll(".activetaskpanel-lvl1");
-    let backgroundsLvl1a = document.querySelector(".activetaskpanel-lvl1a");
+  const mainEditButton = document.querySelector("#activetaskmain-editbutton");
+  const timerButtons = document.querySelectorAll("#timerbuttons-container > button, #activetasktimer-buttoncontainer > button,#activetaskstopwatch-buttoncontainer > button");
+  const backgroundsLvl1 = document.querySelectorAll(".activetaskpanel-lvl1");
+    const backgroundsLvl1a = document.querySelector(".activetaskpanel-lvl1a");
 
-  let listItemAddButton = document.createElement("button")
+  const listItemAddButton = document.createElement("button")
   listItemAddButton.id = "activetaskmain-addbutton";
   listItemAddButton.textContent = "+";
 
@@ -775,8 +789,8 @@ function activetaskInit(task, isTypeReading){
 };
 
 function addList(task, isTypeReading) {
-  let identifier = Date.now().toString();
-  let subId = identifier.substring((identifier.length)/2);
+  const identifier = Date.now().toString();
+  const subId = identifier.substring((identifier.length)/2);
     console.log(subId);
     console.log(task);
   task.items[subId] = "New list item"; 
@@ -790,11 +804,11 @@ function addList(task, isTypeReading) {
 
 // Initialise Pomodoro timer
 function pomodoroInit(task, activePomSlot) {
-  let pomSlots = document.querySelectorAll("#activetaskmainpomedit-entrypoint > .pomedititem-work, .pomedititem-break");
+  const pomSlots = document.querySelectorAll("#activetaskmainpomedit-entrypoint > .pomedititem-work, .pomedititem-break");
 
   // Initialise timer func, update textContent
   pomTimer = new Timer({precision: 'seconds', countdown: true, startValues: {minutes: (task.pomodoroSetup[activePomSlot]).time}});
-    let pomTimerValues = document.querySelector('#maintimer > .values');
+    const pomTimerValues = document.querySelector('#maintimer > .values');
     pomTimerValues.textContent = `${pomTimer.getTimeValues()}`;
     pomSlots[activePomSlot].style.backgroundColor = "#dbdbdb";
   
@@ -804,6 +818,7 @@ function pomodoroInit(task, activePomSlot) {
     // Pomodoro
     pomTimer.start();
   });
+
   pomodoroPauseBtn.addEventListener('click', function(e) {
     // Pomodoro
     pomTimer.pause();
@@ -812,6 +827,7 @@ function pomodoroInit(task, activePomSlot) {
       // Time to complete
       timerToComplete.pause();
   });
+
   pomodoroResetBtn.addEventListener('click', function(e) {
     // Pomodoro
     pomTimer.reset();
@@ -821,28 +837,37 @@ function pomodoroInit(task, activePomSlot) {
       // Time to complete
       timerToComplete.pause();
   });
+
   pomTimer.addEventListener('secondsUpdated', function (e) {
     // Pomodoro
     pomTimerValues.textContent = `${pomTimer.getTimeValues()}`;
   });
+
   pomTimer.addEventListener('started', function (e) {
       // Stopwatch
       stopWatch.start();
         // Time to complete
         timerToComplete.start();
-
-
   });
+  
   pomTimer.addEventListener('reset', function (e) {
     // Pomodoro
     pomTimerValues.textContent = `${pomTimer.getTimeValues()}`;
   });
+
+  // Cycle through to next slot
   pomTimer.addEventListener('targetAchieved', function (e) {
-    // Cycle through to next slot
     pomSlots[activePomSlot].style.backgroundColor = "#ffffff";
+
+    // Increment timeslot, reset if it's bigger than the amount of slots
     activePomSlot++;
+    if(activePomSlot > (task.pomodoroSetup).length) {
+      activePomSlot = 0
+    }
+    // Refresh pomodoro
     pomodoroInit(task,activePomSlot)
-    //pomTimer = new Timer({precision: 'seconds', countdown: true, startValues: {minutes: (task.pomodoroSetup[activePomSlot]).time}});
+
+    // Set textContent and background colour
     pomTimerValues.textContent = `${pomTimer.getTimeValues()}`;
     pomSlots[activePomSlot].style.backgroundColor = "#dbdbdb";
   });
@@ -852,10 +877,10 @@ function pomodoroInit(task, activePomSlot) {
 function otherTimersInit(task) {
   // Initalise timer funcs, update textContent
   stopWatch = new Timer({precision: 'seconds', startValues: {minutes: task.timeElapsed}});  
-  let stopWatchValues = document.querySelector('#activetaskstopwatch-readout > .values');
+  const stopWatchValues = document.querySelector('#activetaskstopwatch-readout > .values');
     document.querySelector('#activetaskstopwatch-readout > .values').textContent = `${stopWatch.getTimeValues()}`;
   timerToComplete = new Timer({precision: 'minutes', countdown: true, startValues: {hours:task.estimatedTimeHours, minutes: task.estimatedTimeMins}});  
-    let timerToCompleteValues = document.querySelector('#activetasktimer-readout > .values');
+    const timerToCompleteValues = document.querySelector('#activetasktimer-readout > .values');
     timerToCompleteValues.textContent = `${timerToComplete.getTimeValues()}`;
     // If our time to complete amounts to days, add 'x' days above the readout
     if (timerToComplete.getTimeValues().days > 0) {
@@ -949,7 +974,7 @@ function taskListInit(task) {
     for (let i=0; i < Object.keys(task.items).length; i++) {
       // Render and log id
       increment++;
-      console.log(`loop no${increment}`)
+      console.log(`loop no${increment}`);
       console.log(taskKey[i]);
       taskListRender(task, taskKey[i], isTypeReading);
     };
@@ -965,23 +990,23 @@ function taskListRender(task, taskKey, isTypeReading) {
   console.log(task.items[taskKey]);
 
   // Create HTML elements
-  let listItem = document.createElement("li");
+  const listItem = document.createElement("li");
   listItem.className = "tasklist-item";
     listItem.setAttribute('role', 'option');
     listItem.setAttribute('aria-checked', 'false');
 
-  let listItemInput = document.createElement("input");
+  const listItemInput = document.createElement("input");
   listItemInput.className = "tasklistitem-input";
     listItemInput.setAttribute('type', 'checkbox');
 
-  let listItemDelBtn = document.createElement("button");
+  const listItemDelBtn = document.createElement("button");
   listItemDelBtn.className = "tasklistitem-delbutton";
   listItemDelBtn.textContent="✕";
 
 
   // Init vars for type reading
-    let listItemInputContent;
-    let listItemInputContentOpenBtn;
+  let listItemInputContent;
+  let listItemInputContentOpenBtn;
   // Check if this is type reading
   if( isTypeReading ) {
     // Underlined link
@@ -1045,8 +1070,10 @@ function taskListRender(task, taskKey, isTypeReading) {
   });
   listItemDelBtn.addEventListener("click", function(event) {
     listItem.remove();
+    
     delete task.items[taskKey];
-    searchAndReplace(kanbanEntries, task, "items");  });
+    searchAndReplace(kanbanEntries, task, "items");  
+  });
 
   task.items[taskKey] = listItemInputContent.textContent;
   // Update array + local storage
@@ -1077,4 +1104,23 @@ function searchAndReplace3D(arr, task, target) {
       set(task.id, arr[i]); 
     };
   };
+};
+
+function isTaskInActiveList(id, removeNode) {
+  const currentActiveTasks = document.querySelectorAll("#dashactivetasks-list > .dashactivetasks-item");
+  let isTaskInActiveList = false;
+
+  for(i=0;i<currentActiveTasks.length;i++) {
+    //console.log(currentActiveTasks[i])
+    if(currentActiveTasks[i].getAttribute('data-id') == id) {
+      isTaskInActiveList = true;
+      if(removeNode==true) {
+        currentActiveTasks[i].remove();
+      }      
+    }; 
+  };
+
+
+
+  return isTaskInActiveList;
 };

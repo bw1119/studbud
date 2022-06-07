@@ -1,0 +1,166 @@
+/* 
+  Media queries - mostly change grids to flex or block, and other changes
+*/
+
+/* Phones; display as block */
+@media only screen and (max-width: 600px) {
+    #container {
+        display: block;
+    }
+    main {
+        display: block;
+    }
+    header {
+        display: flex;
+        width: 100%;
+        height: 75px;
+    }
+        #header-contextmenu{
+            display:block;
+        }
+    #dashboard {
+        display: none;
+        width: 240px;
+        padding-top: 90px;
+    }
+        .dashboard-container-head > button {
+            display: none;
+        }
+        .dash-h4 {
+            font-size:1.75rem;
+        }
+        .dash-subtitle {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+    #kanban-head {
+        //display: block;
+        margin-top: 100px;
+        top: 0;
+        z-index: 1;
+        height: 50px;
+    }
+    #taskadd-form {
+        z-index: 500;
+        width: 300px;
+        padding: 5px 10px 5px 10px;
+    }
+        #taskadd-form > label {
+            font-size: 1.5rem;
+            margin: 5px 0px 5px 0px;
+        }
+        #taskadd-form > select {
+            font-size: 1.1rem
+        }
+        #estimatedTime-container > input, p {
+            font-size:1.1rem;
+            //width:100px;
+        }
+        #taskadd-buttondiv > button {
+            font-size: 1.4rem;
+            width: min-content;
+            margin: 10px 10px 10px 10px;
+        }
+    .taskadd-button {
+        position:sticky;
+    }
+    #kanban-container {
+        width: 550px;
+        height: 900px;
+        min-width: 50px;
+        margin: 0 auto;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        position: relative;
+        //margin: 0px 10px 0px 50px;
+        padding: 0px 10px 0px 10px;
+    }
+        .kanban-column-addbtn {
+            background-color: #70707040;
+            color: #ffffff;
+            height: 100px;
+            border-radius: 100px;
+            left: 50px;
+            font-size: 5rem;
+            font-weight: 300;
+        }
+        .kanban-column-delbtn {
+            background-color: #70707040;
+            color: #ffffff;
+            height: 60px;
+            border-radius: 60px;
+            font-size: 2rem;
+        }
+        
+    #activetask-container {
+        display: block;
+    }
+        #activetask-left{
+            display:flex;
+            margin-bottom: 10px;
+            justify-content: center;
+            flex-direction: row;
+        }
+        #activetaskstopwatch-buttoncontainer > button {
+            height: 40px;
+            font-size:1.1rem;
+            margin: 0px 5px 0px 5px
+        }
+        #activetasktimer-buttoncontainer > button {
+            height: 40px;
+            font-size:1.1rem;
+            margin: 0px 5px 0px 5px
+        }
+        #activetask-timer{
+            margin-top: 0px;
+        }
+            #activetask-timer > h2 {
+                margin: 0px 5px 0px 5px;
+            }
+    #activetask-main{
+        margin: 0px 15px 0px 15px;
+        width: initial;
+    }
+    #activetaskmain-pomodoro {
+        width: initial;
+    }
+        #maintimer > .values {
+            font-size: 6rem;
+        }
+        .tasklistitem-delbutton {
+            color: #707070;
+        }
+
+        #activetask-right {
+            display:flex;
+            flex-direction: row-reverse;
+            margin-bottom: 10px;
+            justify-content: center;
+            flex-direction: row;
+            width: 100%;
+        }
+        #activetask-music{
+            width: 300px;
+        }
+        #activetaskmain-pomedit {
+            border: 1px solid #999;
+            border-radius: 10px;
+        }
+        .pomedititem-input{
+            height: 30px;
+            font-size: 1rem;
+            margin: 5px 5px 5px 0px;
+        }
+        .pomedititem-break > h4 {
+            font-size: 1.3rem;
+            margin: 5px;
+        }
+        .pomedititem-work > h4 {
+            font-size: 1.3rem;
+            margin: 5px;
+        }
+
+    #activetaskmain-pomodoro {
+        margin: 25px 0px 30px 0px;
+    }
+}

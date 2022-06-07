@@ -50,13 +50,12 @@
           <h4 class="dash-h4">Archived tasks</h4>
           <button id="dashdeldtasks-revealbutton" class="dropdownbutton"> ▾ </button>
         </div> 
+        <p class="dash-subtitle"><em>Recently deleted tasks</em></p>
 
         <div id="dashdeldtasks">
           <ul id="dashdeldtasks-list">
           </ul>
         </div>
-
-        <p class="dash-subtitle"><em>Recently deleted tasks</em></p>
       </div>
 
     <!-- End dashboard -->
@@ -64,6 +63,9 @@
 
     <!-- Fixed header - logo on left, account button on right -->
     <header> 
+      <!-- Phone - hamburger button (not functional as of now) -->
+      <button id="header-contextmenu">☰</button>
+      
       <img src="assets/brand/logo.png">
 
       <!-- Profile button - currently non-functional -->
@@ -243,14 +245,16 @@
 
           <!-- Pomodoro editor panel -->
           <div id="activetaskmain-pomedit">
-            <h3 class="activetaskpanel-h3"> Pomodoro </h3>
+            <div class="dashboard-container-head" id="activetaskmainpomedit-head">
+              <h3 class="activetaskpanel-h3"> Pomodoro </h3>
+              <button id="activetaskmainpomedit-revealbutton" class="dropleftbutton"> ▾ </button>
+            </div>
             <!-- Pomodoro timeslots editor -->
             <div class="activetaskpanel-lvl2"  id="activetaskmain-pomeditlist">
               <!-- Timeslots entrypoint -->
               <ul id="activetaskmainpomedit-entrypoint" role="listbox" aria-label="email list">
                 
               </ul>
-
             </div>
           </div>
         </div>
